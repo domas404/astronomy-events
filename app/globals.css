@@ -11,11 +11,16 @@
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --background-gradient: radial-gradient(circle, #16282F 0%, #0F141B 100%);
+    --background-100: #0F1317;
+    --container-border: #30373D;
   }
 }
 
 body {
   color: var(--foreground);
-  background: var(--background);
+  background: var(--background-gradient);
   font-family: Arial, Helvetica, sans-serif;
+  height: 100vh;
+  box-sizing: border-box;
 }
