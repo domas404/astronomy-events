@@ -75,7 +75,7 @@ export default function Header() {
             {
                 menuOpen &&
                 <div
-                    className="absolute h-full w-full bg-black/20 [backdrop-filter:blur(4px)] md:invisible md:pointer-events-none"
+                    className="fixed h-full w-full bg-black/20 [backdrop-filter:blur(4px)] md:invisible md:pointer-events-none"
                     onClick={() => setMenuOpen(!menuOpen)}
                 ></div>
             }
