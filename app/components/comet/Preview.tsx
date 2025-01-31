@@ -1,3 +1,4 @@
+import { Comet } from "../ui/Illustrations";
 
 type cometObject = {
     [key: string]: string
@@ -45,16 +46,7 @@ export default function Preview() {
             </header>
             <section className="flex flex-row">
                 <div className="basis-1/2 flex justify-center">
-                    <div className="">
-                        <div className="flex flex-col justify-center items-center relative -rotate-[30deg] w-32">
-                            <div className="[clip-path:polygon(0%_0%,100%_0%,60%_100%,40%_100%)] w-[90px] h-32
-                            [background:linear-gradient(0deg,#508CA4_0%,#508CA450_40%,#16282F00)]">
-                            </div>
-                            <div className="w-[18px] h-[18px] rounded-full bg-[#508CA4] z-10 flex justify-center items-end absolute -mb-2 bottom-0">
-                                <div className="w-[14px] h-[14px] rounded-full bg-white mb-[1px]"></div>
-                            </div>
-                        </div>
-                    </div>
+                    <Comet />
                 </div>
                 <div className="basis-1/2">
                     <ul className="flex flex-col gap-4">

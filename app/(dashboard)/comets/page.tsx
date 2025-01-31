@@ -4,7 +4,7 @@ import Preview from "@/app/components/comet/Preview";
 
 export default function Page() {
     return (
-        <div className="max-w-[1100px] w-[80%] min-w-[800px] flex flex-row gap-4">
+        <div className="max-w-[1100px] w-[80%] min-w-[800px] flex flex-row gap-4 mt-6">
             <div className="basis-2/5">
                 <Preview />
             </div>

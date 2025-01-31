@@ -1,32 +1,20 @@
+import Panel from "./components/ui/Panel";
+import { Metadata } from "next";
 
+export const metadata: Metadata = {
+	title: 'Home | Astronomy Events',
+}
 
 export default function Home() {
 	return (
-		<div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-			<main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-				<h1>Astronomy events</h1>
-				<div className="flex gap-4 items-center flex-col sm:flex-row">
-					<a
-						className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-						href="./comets"
-						rel="noopener noreferrer"
-					>
-						Comets
-					</a>
-					<a
-						className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-						href="./"
-						rel="noopener noreferrer"
-					>
-						Solar events
-					</a>
-					<a
-						className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-						href="./"
-						rel="noopener noreferrer"
-					>
-						Lunar events
-					</a>
+		<div className="flex justify-center mx-auto border-x pt-20 pb-10
+			bg-[#0F1317] border-[#30373D]">
+			<main className="flex flex-col items-center gap-8 mt-6">
+				<div className="flex flex-col gap-10 flex-wrap items-start h-96">
+					{/* <Panel itemType="comet" />
+					<Panel itemType="asteroid" />
+					<Panel itemType="solarEclipse" />
+					<Panel itemType="lunarEclipse" /> */}
 				</div>
 			</main>
 		</div>

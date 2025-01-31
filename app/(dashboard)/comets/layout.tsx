@@ -6,7 +6,7 @@ export default function CometLayout ({
     children: React.ReactNode
 }) {
     return (
-        <section className="flex justify-center mt-8">
+        <section className="flex justify-center pt-20 pb-10">
             {children}
         </section>
     )

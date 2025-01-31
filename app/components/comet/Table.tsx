@@ -26,6 +26,10 @@ export default function Table() {
                     mappedCometList
                 )
             }
+            <tr className="flex justify-between text-sm">
+                <td>{data?.signature.source}</td>
+                <td>Showing {data?.count} of {data?.total} rows</td>
+            </tr>
         </tbody>
     );
 }
