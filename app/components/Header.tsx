@@ -35,12 +35,12 @@ export default function Header() {
 
     const mappedNavItems = navItems.map((item, index) => {
         return (
-            <li key={index} className='w-full flex md:w-32 md:justify-center'>
+            <li key={index} className='w-full flex md:w-[116px] md:justify-center'>
                 <a
                     href={`./${item}`}
-                    className={`w-full flex items-center p-2 pl-4 rounded-md text-slate-200 
+                    className={`w-full flex items-center p-4 rounded-md text-slate-200 
                         hover:cursor-pointer hover:text-white hover:bg-space-button-hover active:bg-space-button-active transition-colors
-                        md:w-[116px] md:justify-center md:p-1 md:pl-1 md:rounded-full
+                        md:w-[108px] md:justify-center md:p-1 md:rounded-full
                         ${pathname === `/${item}` ? 'bg-space-button-active' : 'bg-space-background'}`}
                 >
                     {navItemNames[index]}
@@ -59,7 +59,7 @@ export default function Header() {
                     <Logo />
                     <div className="flex items-center basis-1/3 order-1 md:order-2">
                         <button className="flex items-center p-2 md:hidden" onClick={() => setMenuOpen(!menuOpen)}>
-                            <MdMenu size={24} />
+                            <MdMenu size={24} className="text-space-text-secondary" />
                         </button>
                         <ul
                             className={`${menuOpen ? 'visible' : 'invisible'} w-[100%] top-16 rounded-lg absolute
@@ -75,7 +75,7 @@ export default function Header() {
             {
                 menuOpen &&
                 <div
-                    className="fixed h-full w-full bg-black/20 [backdrop-filter:blur(4px)] md:invisible md:pointer-events-none"
+                    className="z-20 fixed h-full w-full bg-black/20 [backdrop-filter:blur(4px)] md:invisible md:pointer-events-none"
                     onClick={() => setMenuOpen(!menuOpen)}
                 ></div>
             }

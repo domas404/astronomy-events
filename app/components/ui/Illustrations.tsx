@@ -7,11 +7,15 @@ export const Comet = () => {
         <div className="">
             <div className="flex flex-col justify-center items-center relative -rotate-[30deg] w-28">
                 <div className="[clip-path:polygon(0%_0%,100%_0%,65%_100%,35%_100%)] w-[90px] h-28
-                [background:linear-gradient(0deg,#508CA4_0%,#508CA4_10%,#508CA450_40%,#508CA420_60%,#16282F00)]">
+                [background:linear-gradient(0deg,#508CA4_0%,#508CA4_10%,#508CA450_40%,#508CA420_60%,#16282F00)]
+                md:w-[100px] md:h-36">
                 </div>
                 <div className="w-[28px] h-[28px] rounded-full z-10 flex justify-center items-end absolute -mb-[10px] bottom-0
-                    [background:linear-gradient(0deg,#508CA4_0%,#508CA4_50%,#16282F00)]">
-                    <div className="w-[18px] h-[18px] rounded-full bg-white mb-[2px]"></div>
+                    [background:linear-gradient(0deg,#508CA4_0%,#508CA4_50%,#16282F00)]
+                    md:w-[30px] md:h-[30px] md:-mb-[12px]">
+                    <div className="w-[18px] h-[18px] rounded-full bg-white mb-[2px]
+                        md:w-[20px] md:h-[20px]">
+                    </div>
                 </div>
             </div>
         </div>
@@ -23,12 +27,14 @@ export const Asteroid = () => {
         <div className="">
             <div className="flex flex-col justify-center items-center relative -rotate-[30deg] w-28">
                 <div className="[clip-path:polygon(0%_0%,100%_0%,65%_100%,35%_100%)] w-[90px] h-28
-                    [background:linear-gradient(0deg,#a47450_0%,#a47450_10%,#a4745050_40%,#a4745020_60%,#16282F00)]">
+                    [background:linear-gradient(0deg,#a47450_0%,#a47450_10%,#a4745050_40%,#a4745020_60%,#16282F00)]
+                    md:w-[100px] md:h-36">
                 </div>
                 <div className="w-[28px] h-[28px] rounded-full z-10 flex justify-center items-end absolute -mb-[10px] bottom-0
-                    [background:linear-gradient(0deg,#a47450_0%,#a47450_50%,#16282F00)]">
+                    [background:linear-gradient(0deg,#a47450_0%,#a47450_50%,#16282F00)]
+                    md:w-[30px] md:h-[30px] md:-mb-[12px]">
                 </div>
-                <Image className="rotate-12 absolute z-20 -mb-[12px] -ml-[5px] bottom-0" src={asteroidIcon} alt='' width={30} />
+                <Image className="rotate-12 absolute z-20 -mb-[12px] -ml-[5px] bottom-0 w-[30px] md:w-[34px] md:-mb-[14px]" src={asteroidIcon} alt='' />
             </div>
         </div>
     );
@@ -40,7 +46,7 @@ export const SolarEclipse = () => {
             <div className="w-28 h-28 flex justify-center items-center">
                 <div className="relative w-[76px] h-[76px]">
                     <div className="absolute h-[76px] w-[76px] rounded-full bg-yellow-300"></div>
-                    <div className="absolute h-[70px] w-[70px] rounded-full bg-black left-2 top-2"></div>
+                    <div className="absolute h-[70px] w-[70px] rounded-full bg-gray-900 left-2 top-2"></div>
                 </div>
             </div>
         </div>

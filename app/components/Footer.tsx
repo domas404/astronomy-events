@@ -15,7 +15,7 @@ const dataSources: DataSource[] = [
 
 const learnMoreSources: DataSource[] = [
     { title: 'NASA Small-Body Database', link: 'https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/' }
-]
+];
 
 type LinkItemProps = { item: DataSource }
 
@@ -53,21 +53,23 @@ export default function Footer() {
 
     return (
         <footer className="w-full border-t border-space-border bg-space-background">
-            <div className="w-full flex flex-col items-center mx-auto py-10 max-w-[1200px]">
+            <div className="w-full flex flex-col items-center mx-auto py-10 max-w-[1200px] md:w-[90%]">
                 <div className="w-full flex flex-col md:flex-row px-10 gap-8 justify-between">
-                    <div className="w-full">
-                        <div className="font-semibold mb-4">Data sources</div>
-                        <ul className="text-sm text-space-text-secondary">
-                            {mappedDataSources}
-                        </ul>
+                    <div className="w-full flex flex-col gap-8 sm:flex-row justify-between md:basis-2/3">
+                        <div className="w-full">
+                            <div className="font-semibold mb-4">Data sources</div>
+                            <ul className="text-sm text-space-text-secondary">
+                                {mappedDataSources}
+                            </ul>
+                        </div>
+                        <div className="w-full">
+                            <div className="font-semibold mb-4">Learn more</div>
+                            <ul className="text-sm text-space-text-secondary">
+                                {mappedLearnMore}
+                            </ul>
+                        </div>
                     </div>
-                    <div className="w-full">
-                        <div className="font-semibold mb-4">Learn more</div>
-                        <ul className="text-sm text-space-text-secondary">
-                            {mappedLearnMore}
-                        </ul>
-                    </div>
-                    <div className="w-full flex flex-row-reverse md:flex-col gap-2 items-end justify-between mt-4 md:m-0">
+                    <div className="w-full flex flex-row-reverse md:flex-col md:basis-1/3 gap-2 items-end justify-between mt-4 md:m-0">
                         <Language />
                         <div className="w-24 border border-space-border rounded-full h-8 flex justify-center items-center gap-1
                             hover:bg-space-button-hover transition-colors hover:cursor-pointer active:bg-space-button-active">
