@@ -35,7 +35,7 @@ export default function Header() {
 
     const mappedNavItems = navItems.map((item, index) => {
         return (
-            <li key={index} className='w-full flex md:w-[116px] md:justify-center'>
+            <li key={index} className='flex mx-2 md:w-[116px] md:justify-center md:mx-0'>
                 <a
                     href={`./${item}`}
                     className={`w-full flex items-center p-4 rounded-md text-slate-200 
@@ -62,10 +62,14 @@ export default function Header() {
                             <MdMenu size={24} className="text-space-text-secondary" />
                         </button>
                         <ul
-                            className={`${menuOpen ? 'visible' : 'invisible'} w-[100%] top-16 rounded-lg absolute
+                            className={`${menuOpen ? 'visible' : 'invisible'} w-[100%] top-16 gap-1 rounded-lg absolute pb-4
                                 flex flex-col border py-2 px-2 border-space-border bg-space-background
                                 md:flex-row md:text-sm md:relative md:top-0 md:rounded-full md:visible md:py-1 md:px-0`}
                         >
+                            <li className="md:hidden p-4 mx-5 mb-1 uppercase tracking-wider font-semibold flex
+                                text-space-text-secondary border-b border-space-border justify-center">
+                                Astronomy Events
+                            </li>
                             {mappedNavItems}
                         </ul>
                     </div>
