@@ -10,10 +10,12 @@ export default function TableRow({ name, date, dist }: Props) {
     const distance = parseFloat(dist).toPrecision(4);
 
     return (
-        <tr className="bg-[#0F1317] text-white p-4 flex flex-row gap-5 rounded-lg justify-between">
-            <td className="w-1/3">{name}</td>
-            <td className="w-1/3 flex justify-center">{distance}</td>
-            <td className="w-1/3 flex justify-center">{dateISO}</td>
-        </tr>
+        <>
+            <tr className="text-space-text h-14 items-center mx-4 flex flex-row gap-5 justify-between border-b border-space-border">
+                <td className="w-2/3">{name}</td>
+                <td className="w-1/3 hidden md:flex md:justify-center">{distance}</td>
+                <td className="w-1/3 min-w-[100px] flex justify-end text-space-text-secondary">{dateISO}</td>
+            </tr>
+        </>
     )
 }

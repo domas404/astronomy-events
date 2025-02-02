@@ -9,7 +9,8 @@ type ItemType = {
         title: string,
         name: boolean,
         labels: string[],
-        data: string[]
+        data: string[],
+        route: string
     }
 }
 
@@ -18,25 +19,29 @@ const item: ItemType = {
         title: 'Nearest comet',
         name: true,
         labels: ['type', 'period', 'next perihelion', 'type', 'period', 'next perihelion'],
-        data: ['Periodic', '4 years', '2025-02-16', 'Periodic', '2 years', '2025-01-30']
+        data: ['Periodic', '4 years', '2025-02-16', 'Periodic', '2 years', '2025-01-30'],
+        route: './comets'
     },
     asteroid: {
         title: 'Nearest asteroid',
         name: true,
         labels: ['type', 'period', 'next perihelion', 'type', 'period', 'next perihelion'],
-        data: ['Periodic', '2 years', '2025-01-30','Periodic', '2 years', '2025-01-30']
+        data: ['Periodic', '2 years', '2025-01-30','Periodic', '2 years', '2025-01-30'],
+        route: './asteroids'
     },
     solarEclipse: {
         title: 'Upcoming solar eclipse',
         name: false,
         labels: ['type', 'date', 'visibility in vilnius'],
-        data: ['Partial', '2025-11-20', 'Not visible']
+        data: ['Partial', '2025-11-20', 'Not visible'],
+        route: './solar-events'
     },
     lunarEclipse: {
         title: 'Upcoming lunar eclipse',
         name: false,
         labels: ['type', 'date', 'visibility in vilnius'],
-        data: ['Full', '2025-09-17', 'Visible']
+        data: ['Full', '2025-09-17', 'Visible'],
+        route: './lunar-events'
     }
 }
 
@@ -93,11 +98,11 @@ export default function Panel({ itemType }: Props) {
                 <div className="w-2 h-2 rounded-full border border-slate-400"></div>
                 <div className="w-2 h-2 rounded-full border border-slate-400"></div>
             </div>
-            <div className="mt-6 transition-colors hover:cursor-pointer p-3 rounded-md text-sm flex justify-center
+            <a href={item[itemType].route} className="mt-6 transition-colors hover:cursor-pointer p-3 rounded-md text-sm flex justify-center
                 bg-space-button hover:bg-space-button-hover active:bg-space-button-active
                 lg:w-64 lg:mx-auto">
                 View all
-            </div>
+            </a>
             {
                 itemType !== 'lunarEclipse' &&
                 <div className="mt-10 h-[1px] bg-space-border"></div>

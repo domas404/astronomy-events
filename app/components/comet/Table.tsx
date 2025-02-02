@@ -11,12 +11,13 @@ export default function Table() {
 
     const mappedCometList = data?.data.map((item, index) => {
         return (
-            <TableRow key={index} name={item.fullname} date={item.cd} dist={item.dist} />
+                <TableRow key={index} name={item.fullname} date={item.cd} dist={item.dist} />
         );
     });
 
     return (
-        <tbody className="flex flex-col gap-2">
+        <tbody className="flex flex-col bg-space-background">
+            {/* <TableSkeleton /> */}
             {
                 loading ?
                 <TableSkeleton /> :
@@ -26,9 +27,19 @@ export default function Table() {
                     mappedCometList
                 )
             }
-            <tr className="flex justify-between text-sm">
-                <td>{data?.signature.source}</td>
-                <td>Showing {data?.count} of {data?.total} rows</td>
+            <tr className="flex flex-col mx-4 py-2">
+                {/* <td className="flex justify-center items-center h-12 bg-space-button my-2 rounded-md">Load more</td> */}
+                {
+                    data ?
+                    <>
+                        <td className="text-xs text-space-text-secondary">Showing {data?.count} of {data?.total} rows</td>
+                        <td className="text-xs text-space-text-secondary">{data?.signature.source}</td>
+                    </> :
+                    <>
+                        <td className="text-xs text-space-text-secondary">Receiving data...</td>
+                        <td className="text-xs text-space-text-secondary">NASA...</td>
+                    </>
+                }
             </tr>
         </tbody>
     );
