@@ -16,20 +16,40 @@ export default function Table() {
     });
 
     return (
-        <tbody className="flex flex-col bg-space-background">
+        <tbody className="flex flex-col bg-space-background w-full">
             {/* <TableSkeleton /> */}
             {
                 loading ?
-                <TableSkeleton /> :
+                <>
+                    <TableSkeleton />
+                    <tr className="flex flex-col mx-4 py-2">
+                        <td className="text-xs text-space-text-secondary">Receiving data...</td>
+                        <td className="text-xs text-space-text-secondary">NASA...</td>
+                    </tr>
+                </>
+                :
                 (
                     errorMessage ?
-                    <TableError error={errorMessage} /> :
-                    mappedCometList
+                    <>
+                        <TableError error={errorMessage} />
+                        <tr className="flex flex-col mx-4 py-2">
+                            <td className="text-xs text-space-text-secondary">Failed to load data.</td>
+                        </tr>
+                        {/* <td className="text-xs text-space-text-secondary">NASA...</td> */}
+                    </>
+                    :
+                    <>
+                        {mappedCometList}
+                        <tr className="flex flex-col mx-4 py-2">
+                            <td className="text-xs text-space-text-secondary">Showing {data?.count} of {data?.total} rows</td>
+                            <td className="text-xs text-space-text-secondary">{data?.signature.source}</td>
+                        </tr>
+                    </>
                 )
             }
-            <tr className="flex flex-col mx-4 py-2">
+            {/* <tr className="flex flex-col mx-4 py-2"> */}
                 {/* <td className="flex justify-center items-center h-12 bg-space-button my-2 rounded-md">Load more</td> */}
-                {
+                {/* {
                     data ?
                     <>
                         <td className="text-xs text-space-text-secondary">Showing {data?.count} of {data?.total} rows</td>
@@ -39,8 +59,8 @@ export default function Table() {
                         <td className="text-xs text-space-text-secondary">Receiving data...</td>
                         <td className="text-xs text-space-text-secondary">NASA...</td>
                     </>
-                }
-            </tr>
+                } */}
+            {/* </tr> */}
         </tbody>
     );
 }
