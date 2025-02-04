@@ -5,7 +5,7 @@ import { CloseApproachData } from "@/app/lib/types";
 import { SBDB_Data } from "@/app/lib/types/SBDB";
 import { useSelectedData } from "@/app/hooks/useSelectedData";
 import { DataListSkeleton, MainDataSkeleton } from "../skeletons/Skeletons";
-import { smallBodyLabelMap } from "@/app/lib/label-data";
+import { smallBodyLabelMap, smallBodyLabelExplanationMap } from "@/app/lib/label-data";
 
 type DataToDisplay = {
     [key: string]: string | undefined;
@@ -24,7 +24,11 @@ const DataList = ({ data }: { data: SBDB_Data }) => {
     }
     const mappedData = Object.keys(dataToDisplay!).map((key, index) => {
         return (
-            <li key={index} className="basis-1/2 py-4">
+            <li key={index} className="basis-1/2 p-2 my-2 hover:bg-space-button-active rounded-lg group transition-colors">
+                <div className="mt-14 -ml-2 rounded-lg p-2 invisible group-hover:visible absolute max-w-48
+                    bg-space-button-active transition-all delay-0 group-hover:delay-700 border border-space-border text-sm">
+                    {smallBodyLabelExplanationMap[key]}
+                </div>
                 <div className="text-xs text-slate-400 uppercase font-bold">{smallBodyLabelMap[key]}</div>
                 <div>{dataToDisplay![key as keyof SBDB_Data] ? dataToDisplay![key as keyof SBDB_Data] : 'No data'}</div>
             </li>
@@ -44,10 +48,14 @@ const Visibility = ({ magnitude }: { magnitude: string | undefined }) => {
         }
     }
     return (
-        <>
+        <li className="md:basis-1/2 p-2 hover:bg-space-button-hover rounded-lg group transition-all">
+            <div className="mt-14 -ml-2 rounded-lg p-2 invisible group-hover:visible absolute max-w-48
+                bg-space-button-active transition-all delay-0 group-hover:delay-700 border border-space-border text-sm">
+                {smallBodyLabelExplanationMap['visibility']}
+            </div>
             <div className="text-xs text-slate-400 uppercase font-bold">Visibility</div>
             <div>{visibility}</div>
-        </>
+        </li>
     );
 }
 
@@ -56,10 +64,14 @@ const ClosestApproach = ({ distance }: { distance: string | undefined }) => {
     if (distance)
         closestApproach = parseFloat(distance).toFixed(4).toString();
     return (
-        <>
+        <li className="md:basis-1/2 p-2 hover:bg-space-button-hover rounded-lg group transition-all">
+            <div className="mt-14 -ml-2 rounded-lg p-2 invisible group-hover:visible absolute max-w-48
+                bg-space-button-active transition-all delay-0 group-hover:delay-700 border border-space-border text-sm">
+                {smallBodyLabelExplanationMap['next_perihelion']}
+            </div>
             <div className="text-xs text-slate-400 uppercase font-bold">Closest approach</div>
             <div>{closestApproach} AU</div>
-        </>
+        </li>
     );
 }
 
@@ -68,10 +80,14 @@ const ClosestApproachDate = ({ date }: { date: string | undefined }) => {
     if (date)
         closestApproachDate = (new Date(date)).toISOString().slice(0, 10);
     return (
-        <>
+        <li className="md:basis-1/2 p-2 hover:bg-space-button-hover rounded-lg group transition-all">
+            <div className="mt-14 -ml-2 rounded-lg p-2 invisible group-hover:visible absolute max-w-48
+                bg-space-button-active transition-all delay-0 group-hover:delay-700 border border-space-border text-sm">
+                {smallBodyLabelExplanationMap['closest_approach']}
+            </div>
             <div className="text-xs text-slate-400 uppercase font-bold">Next perihelion</div>
             <div>{closestApproachDate}</div>
-        </>
+        </li>
     );
 }
 
@@ -100,27 +116,20 @@ export default function Preview({ selectedEvent, type }: Props) {
                     { type === 'comet' && <Comet /> }
                     { type === 'asteroid' && <Asteroid /> }
                 </div>
-                <ul className="w-2/3 mx-6 my-4 flex flex-col flex-nowrap md:mx-8 md:pl-8 md:border-l border-space-border">
+                <ul className="w-2/3 mx-6 my-4 flex flex-col flex-nowrap md:mx-8 md:pl-6 md:border-l border-space-border">
                     {
                         loading || !data ?
                         <MainDataSkeleton /> :
                         <>
-                            <li className="md:basis-1/2 py-2">
-                                <Visibility magnitude={data.phys_par?.magnitude} />
-                            </li>
-                            <li className="md:basis-1/2 py-2">
-                                <ClosestApproach distance={data.ca_data?.distance} />
-                            </li>
-                            <li className="md:basis-1/2 py-2">
-                                <ClosestApproachDate date={data.ca_data?.closest_date} />
-                            </li>
-                        
+                            <Visibility magnitude={data.phys_par?.magnitude} />
+                            <ClosestApproach distance={data.ca_data?.distance} />
+                            <ClosestApproachDate date={data.ca_data?.closest_date} />
                         </>
                     }
                 </ul>
             </section>
             <section>
-                <div className="bg-space-button px-8 py-4 rounded-lg flex flex-row">
+                <div className="bg-space-button px-6 py-4 rounded-lg flex flex-row">
                     <ul className="flex flex-row flex-wrap w-full">
                         {
                             loading || !data ?
@@ -131,6 +140,9 @@ export default function Preview({ selectedEvent, type }: Props) {
                     </ul>
                 </div>
             </section>
+            <div className="flex-col text-xs -mt-3 ml-2 text-space-text-secondary">
+                <div>1 AU - a unit of measurement equal to the average distance from the Earth to the Sun {'(~150M km)'}.</div>
+            </div>
         </div>
     )
 }
