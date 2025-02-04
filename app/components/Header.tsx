@@ -5,8 +5,19 @@ import { useState } from "react";
 import { MdOutlineLocationOn } from "react-icons/md";
 import { MdMenu } from "react-icons/md";
 
-const navItems = ['asteroids', 'comets', 'solar-events', 'lunar-events'];
-const navItemNames = ['Asteroids', 'Comets', 'Solar Events', 'Lunar Events'];
+const navItems = [
+    'asteroids',
+    'comets',
+    // 'solar-events',
+    // 'lunar-events'
+];
+
+const navItemNames = [
+    'Asteroids',
+    'Comets',
+    // 'Solar Events',
+    // 'Lunar Events'
+];
 
 const Logo = () => {
     return (
@@ -62,9 +73,9 @@ export default function Header() {
                             <MdMenu size={24} className="text-space-text-secondary" />
                         </button>
                         <ul
-                            className={`${menuOpen ? 'visible' : 'invisible'} w-[100%] top-16 gap-1 rounded-lg absolute pb-4
+                            className={`${menuOpen ? 'visible' : 'invisible'} w-full top-16 gap-1 rounded-lg absolute pb-4
                                 flex flex-col border py-2 px-2 border-space-border bg-space-background
-                                md:flex-row md:text-sm md:relative md:top-0 md:rounded-full md:visible md:py-1 md:px-0`}
+                                md:w-auto md:mx-auto md:flex-row md:text-sm md:relative md:top-0 md:rounded-full md:visible md:py-1 md:px-0`}
                         >
                             <li className="md:hidden p-4 mx-5 mb-1 uppercase tracking-wider font-semibold flex
                                 text-space-text-secondary border-b border-space-border justify-center">

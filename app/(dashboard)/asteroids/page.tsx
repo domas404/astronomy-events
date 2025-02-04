@@ -1,4 +1,4 @@
-import AsteroidView from "@/app/components/asteroid/AsteroidView";
+import AsteroidView from "@/app/components/small-body/AsteroidView";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

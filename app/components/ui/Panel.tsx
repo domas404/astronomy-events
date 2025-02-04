@@ -104,7 +104,7 @@ export default function Panel({ itemType }: Props) {
                 View all
             </a>
             {
-                itemType !== 'lunarEclipse' &&
+                itemType !== 'asteroid' &&
                 <div className="mt-10 h-[1px] bg-space-border"></div>
             }
         </div>

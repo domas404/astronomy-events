@@ -1,4 +1,4 @@
-import CometView from "@/app/components/comet/CometView";
+import CometView from "@/app/components/small-body/CometView";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

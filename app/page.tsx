@@ -13,8 +13,8 @@ export default function Home() {
 				<div className="w-full flex flex-row flex-wrap items-start">
 					<Panel itemType="comet" />
 					<Panel itemType="asteroid" />
-					<Panel itemType="solarEclipse" />
-					<Panel itemType="lunarEclipse" />
+					{/* <Panel itemType="solarEclipse" />
+					<Panel itemType="lunarEclipse" /> */}
 				</div>
 			</main>
 		</div>
