@@ -71,11 +71,15 @@ export default function Footer() {
                     </div>
                     <div className="w-full flex flex-row-reverse md:flex-col md:basis-1/3 gap-2 items-end justify-between mt-4 md:m-0">
                         <Language />
-                        <div className="w-24 border border-space-border rounded-full h-8 flex justify-center items-center gap-1
-                            hover:bg-space-button-hover transition-colors hover:cursor-pointer active:bg-space-button-active">
+                        <a
+                            href="https://github.com/domas404/astronomy-events"
+                            target="_blank"
+                            className="w-24 border border-space-border rounded-full h-8 flex justify-center items-center gap-1
+                                hover:bg-space-button-hover transition-colors hover:cursor-pointer active:bg-space-button-active"
+                        >
                             <FaGithub />
                             <div className="text-sm">GitHub</div>
-                        </div>
+                        </a>
                     </div>
                 </div>
                 <div className="pt-8 flex flex-row justify-center items-center w-[100%]">

@@ -4,14 +4,30 @@ import TableRow from "./TableRow";
 import { TableSkeleton } from "../skeletons/Skeletons";
 import { TableError } from "../errors/Errors";
 import { useComets } from "@/app/hooks/useComets";
+// import { useSelectedEvent } from "@/app/hooks/useSelectedEvent";
+import { CloseApproachData } from "@/app/lib/types";
 
-export default function Table() {
+type Props = {
+    selectedEvent: CloseApproachData | undefined;
+    updateSelectedEvent: (des: string) => void;
+}
+
+export default function Table({ selectedEvent, updateSelectedEvent }: Props) {
 
     const { data, loading, errorMessage } = useComets();
-
+    
     const mappedCometList = data?.data.map((item, index) => {
+        const selectedDes = selectedEvent?.des;
         return (
-                <TableRow key={index} name={item.fullname} date={item.cd} dist={item.dist} />
+            <TableRow
+                key={index}
+                des={item.des}
+                name={item.fullname}
+                date={item.cd}
+                dist={item.dist}
+                selected={item.des === selectedDes}
+                updateSelectedEvent={updateSelectedEvent}
+            />
         );
     });
 
@@ -35,7 +51,6 @@ export default function Table() {
                         <tr className="flex flex-col mx-4 py-2">
                             <td className="text-xs text-space-text-secondary">Failed to load data.</td>
                         </tr>
-                        {/* <td className="text-xs text-space-text-secondary">NASA...</td> */}
                     </>
                     :
                     <>

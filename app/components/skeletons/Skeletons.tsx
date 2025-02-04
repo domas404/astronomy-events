@@ -1,6 +1,6 @@
 export const TableSkeleton = () => {
 
-    const rowSkeletons = Array(5).fill(null);
+    const rowSkeletons = Array(10).fill(null);
 
     const mappedRowSkeletons = rowSkeletons.map((_, index) => {
         return (
