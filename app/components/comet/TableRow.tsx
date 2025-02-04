@@ -10,7 +10,7 @@ type Props = {
 export default function TableRow({ name, des, date, dist, selected, updateSelectedEvent }: Props) {
 
     const dateISO = (new Date(date)).toISOString().slice(0, 10);
-    const distance = parseFloat(dist).toPrecision(4);
+    const distance = parseFloat(dist).toFixed(4);
 
     return (
         <>

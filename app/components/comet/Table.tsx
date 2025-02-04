@@ -3,18 +3,17 @@
 import TableRow from "./TableRow";
 import { TableSkeleton } from "../skeletons/Skeletons";
 import { TableError } from "../errors/Errors";
-import { useComets } from "@/app/hooks/useComets";
-// import { useSelectedEvent } from "@/app/hooks/useSelectedEvent";
-import { CloseApproachData } from "@/app/lib/types";
+import { CloseApproachData, CometApiData } from "@/app/lib/types";
 
 type Props = {
-    selectedEvent: CloseApproachData | undefined;
-    updateSelectedEvent: (des: string) => void;
+    selectedEvent: CloseApproachData | undefined,
+    updateSelectedEvent: (des: string) => void,
+    data: CometApiData | undefined,
+    loading: boolean,
+    errorMessage: string | undefined
 }
 
-export default function Table({ selectedEvent, updateSelectedEvent }: Props) {
-
-    const { data, loading, errorMessage } = useComets();
+export default function Table({ selectedEvent, updateSelectedEvent, data, loading, errorMessage }: Props) {
     
     const mappedCometList = data?.data.map((item, index) => {
         const selectedDes = selectedEvent?.des;
@@ -62,20 +61,6 @@ export default function Table({ selectedEvent, updateSelectedEvent }: Props) {
                     </>
                 )
             }
-            {/* <tr className="flex flex-col mx-4 py-2"> */}
-                {/* <td className="flex justify-center items-center h-12 bg-space-button my-2 rounded-md">Load more</td> */}
-                {/* {
-                    data ?
-                    <>
-                        <td className="text-xs text-space-text-secondary">Showing {data?.count} of {data?.total} rows</td>
-                        <td className="text-xs text-space-text-secondary">{data?.signature.source}</td>
-                    </> :
-                    <>
-                        <td className="text-xs text-space-text-secondary">Receiving data...</td>
-                        <td className="text-xs text-space-text-secondary">NASA...</td>
-                    </>
-                } */}
-            {/* </tr> */}
         </tbody>
     );
 }

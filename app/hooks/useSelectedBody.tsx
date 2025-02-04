@@ -1,21 +1,17 @@
 'use client';
 
 import { useEffect, useState } from "react";
-import { useFetchClosestCometsQuery } from "../lib/redux/features/cometApi";
-import { CloseApproachData } from "../lib/types";
+import { CloseApproachData, CometApiData } from "../lib/types";
 
-export function useSelectedEvent() {
-    const { data, isLoading } = useFetchClosestCometsQuery();
-    const [loading, setLoading] = useState(true);
+export function useSelectedBody({ data, loading }: { data: CometApiData | undefined, loading: boolean }) {
 
     const [selectedEvent, setSelectedEvent] = useState<CloseApproachData | undefined>(undefined);
     
     useEffect(() => {
-        if (!isLoading) {
-            setLoading(false);
+        if (!loading) {
             setSelectedEvent(data?.data[0]);
         }
-    }, [isLoading, data]);
+    }, [loading, data]);
 
     const updateSelectedEvent = (des: string) => {
         if (data) {
@@ -24,5 +20,5 @@ export function useSelectedEvent() {
         }
     }
 
-    return { selectedEvent, updateSelectedEvent, loading };
+    return { selectedEvent, updateSelectedEvent };
 }

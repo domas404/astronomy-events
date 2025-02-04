@@ -1,11 +1,11 @@
 'use client';
 
 import { useEffect, useState } from "react";
-import { useFetchClosestCometsQuery } from "../lib/redux/features/nasaApi";
+import { useFetchClosestAsteroidsQuery } from "../lib/redux/features/nasaApi";
 
-export function useComets() {
+export function useAsteroids() {
 
-    const { data, error, isLoading } = useFetchClosestCometsQuery();
+    const { data, error, isLoading } = useFetchClosestAsteroidsQuery();
     const [loading, setLoading] = useState(true);
     const [errorMessage, setErrorMessage] = useState<undefined | string>(undefined);
 

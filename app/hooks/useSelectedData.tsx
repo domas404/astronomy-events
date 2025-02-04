@@ -1,13 +1,13 @@
 'use client';
 
 import { useEffect, useState } from "react";
-import { useFetchSelectedCometQuery } from "../lib/redux/features/cometApi";
+import { useFetchSelectedBodyQuery } from "../lib/redux/features/nasaApi";
 import { CloseApproachData } from "../lib/types";
 
 export function useSelectedData({ selectedEvent }: { selectedEvent: CloseApproachData | undefined }) {
     
     const [loading, setLoading] = useState(true);
-    const { data, isFetching } = useFetchSelectedCometQuery(
+    const { data, isFetching } = useFetchSelectedBodyQuery(
         { des: selectedEvent?.des },
         { skip: !selectedEvent }
     );
