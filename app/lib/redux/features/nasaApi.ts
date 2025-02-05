@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { CloseApproachData, CometApiResponse } from "../../types";
 import { SBDB_Data, SBDB_Response } from "../../types/SBDB";
 
-const BASE_URL = 'https://ssd-api.jpl.nasa.gov';
+const BASE_URL = 'https://proxy.corsfix.com/?https://ssd-api.jpl.nasa.gov';
 
 export const nasaApi = createApi({
 	reducerPath: 'nasaApi',
