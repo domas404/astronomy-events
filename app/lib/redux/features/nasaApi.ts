@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { CloseApproachData, CometApiData, CometApiResponse } from "../../types";
+import { CloseApproachData, CometApiResponse } from "../../types";
 import { SBDB_Data, SBDB_Response } from "../../types/SBDB";
 
 const BASE_URL = 'https://ssd-api.jpl.nasa.gov';
@@ -8,8 +8,9 @@ export const nasaApi = createApi({
 	reducerPath: 'nasaApi',
 	baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
 	endpoints: (builder) => ({
-		fetchClosestComets: builder.query<CometApiData, void>({
-			query: () => `/cad.api?kind=c&date-max=2030-12-31&dist-max=0.5&sort=date&diameter=true&fullname=true&limit=10`,
+		fetchClosestBodies: builder.query({
+			query: ({ kind, limit }: { kind: 'a' | 'c', limit: number }) =>
+				`/cad.api?kind=${kind}&date-max=2030-12-31&dist-max=0.5&sort=date&diameter=true&fullname=true&limit=${limit}`,
 			keepUnusedDataFor: 300,
 			transformResponse: (response: CometApiResponse) => {
 				const keys = response.fields;
@@ -68,32 +69,10 @@ export const nasaApi = createApi({
 				return cometData;
 			}
 		}),
-		fetchClosestAsteroids: builder.query<CometApiData, void>({
-			query: () => `/cad.api?kind=a&date-max=2030-12-31&dist-max=0.5&sort=date&diameter=true&fullname=true&limit=10`,
-			keepUnusedDataFor: 300,
-			transformResponse: (response: CometApiResponse) => {
-				const keys = response.fields;
-				const transformedData = response.data.map((item) => {
-					return item.reduce((acc, value, index) => {
-						acc[keys[index]] = value ?? null;
-						return acc;
-					}, {} as Record<string, string | null>);
-				})
-				
-				return {
-					signature: response.signature,
-					fields: response.fields,
-					total: response.total,
-					count: response.count,
-					data: [...transformedData] as CloseApproachData[]
-				}
-			}
-		}),
 	}),
 });
 
 export const  {
-	useFetchClosestCometsQuery,
+	useFetchClosestBodiesQuery,
 	useFetchSelectedBodyQuery,
-	useFetchClosestAsteroidsQuery
 } = nasaApi;
