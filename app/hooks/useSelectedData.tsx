@@ -13,7 +13,7 @@ export function useSelectedData({ selectedEvent }: { selectedEvent: CloseApproac
     );
 
     useEffect(() => {
-        console.log(isFetching);
+        // console.log(isFetching);
         if (!isFetching) {
             setLoading(false);
         } else {

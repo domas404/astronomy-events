@@ -4,11 +4,11 @@ import TableHead from "@/app/components/small-body/TableHead";
 import Table from "@/app/components/small-body/Table";
 import Preview from "@/app/components/small-body/Preview";
 import { useSelectedBody } from "@/app/hooks/useSelectedBody";
-import { useAsteroids } from "@/app/hooks/useAsteroids";
+import { useBodies } from "@/app/hooks/useBodies";
 
 export default function AsteroidView() {
 
-    const { data, loading, errorMessage } = useAsteroids();
+    const { data, loading, errorMessage } = useBodies({ kind: 'a', limit: 10 });
     const { selectedEvent, updateSelectedEvent } = useSelectedBody({ data, loading });
 
     return (

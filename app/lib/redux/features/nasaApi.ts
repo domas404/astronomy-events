@@ -58,12 +58,12 @@ export const nasaApi = createApi({
 						orbit_class: response.object.orbit_class,
 						fullname: response.object.fullname
 					},
-					ca_data: {
-						closest_date: response.ca_data[nextClosestApproach].cd,
-						orbital_speed: response.ca_data[nextClosestApproach].v_rel,
-						distance: response.ca_data[nextClosestApproach].dist,
-						last_date: response.ca_data[lastClosestApproach].cd,
-					}
+					ca_data: response.ca_data.length > 0 ? {
+						closest_date: response.ca_data[nextClosestApproach]?.cd,
+						orbital_speed: response.ca_data[nextClosestApproach]?.v_rel,
+						distance: response.ca_data[nextClosestApproach]?.dist,
+						last_date: response.ca_data[lastClosestApproach]?.cd,
+					} : undefined
 				}
 
 				return cometData;

@@ -1,4 +1,12 @@
-import { Asteroid, Comet, LunarEclipse, SolarEclipse } from "./Illustrations";
+'use client';
+
+import { Asteroid, Comet } from "./Illustrations";
+import { useBodies } from "@/app/hooks/useBodies";
+import { SBDB_Data } from "@/app/lib/types/SBDB";
+import { HomeDataView } from "../small-body/DataView";
+import { useSelectedBody } from "@/app/hooks/useSelectedBody";
+import { useSelectedData } from "@/app/hooks/useSelectedData";
+import { HomeDataSkeleton } from "../skeletons/Skeletons";
 
 type Props = {
     itemType: string;
@@ -7,9 +15,6 @@ type Props = {
 type ItemType = {
     [key: string]: {
         title: string,
-        name: boolean,
-        labels: string[],
-        data: string[],
         route: string
     }
 }
@@ -17,44 +22,40 @@ type ItemType = {
 const item: ItemType = {
     comet: {
         title: 'Nearest comet',
-        name: true,
-        labels: ['type', 'period', 'next perihelion', 'type', 'period', 'next perihelion'],
-        data: ['Periodic', '4 years', '2025-02-16', 'Periodic', '2 years', '2025-01-30'],
         route: './comets'
     },
     asteroid: {
         title: 'Nearest asteroid',
-        name: true,
-        labels: ['type', 'period', 'next perihelion', 'type', 'period', 'next perihelion'],
-        data: ['Periodic', '2 years', '2025-01-30','Periodic', '2 years', '2025-01-30'],
         route: './asteroids'
     },
-    solarEclipse: {
-        title: 'Upcoming solar eclipse',
-        name: false,
-        labels: ['type', 'date', 'visibility in vilnius'],
-        data: ['Partial', '2025-11-20', 'Not visible'],
-        route: './solar-events'
-    },
-    lunarEclipse: {
-        title: 'Upcoming lunar eclipse',
-        name: false,
-        labels: ['type', 'date', 'visibility in vilnius'],
-        data: ['Full', '2025-09-17', 'Visible'],
-        route: './lunar-events'
+}
+
+type DataToDisplay = {
+    [key: string]: string | undefined;
+}
+
+const DataList = ({ data }: { data: SBDB_Data }) => {
+    const dataToDisplay: DataToDisplay = {
+        visibility: data.phys_par?.magnitude,
+        closest_approach: data.ca_data?.distance,
+        next_perihelion: data.ca_data?.closest_date,
+        last_perihelion: data.ca_data?.last_date,
+        period: data.orbit?.period,
+        diameter: data.phys_par?.diameter
     }
+    const mappedData = Object.keys(dataToDisplay).map((key, index) => {
+        return <HomeDataView key={index} id={key} value={dataToDisplay[key]} index={index} />
+    });
+    return mappedData;
 }
 
 export default function Panel({ itemType }: Props) {
 
-    const mappedInfo = item[itemType].labels.map((value, index) => {
-        return (
-            <li key={index} className={`${index > 2 && 'hidden md:block'} md:basis-1/2 py-2`}>
-                <div className="text-xs text-space-text-secondary uppercase font-bold">{value}</div>
-                <div className="">{item[itemType].data[index]}</div>
-            </li>
-        )
-    });
+    const kind = itemType === 'comet' ? 'c' : 'a';
+
+    const { data: bodiesData, loading: bodiesLoading } = useBodies({ kind, limit: 1 });
+    const { selectedEvent } = useSelectedBody({ data: bodiesData, loading: bodiesLoading });
+    const { data, loading } = useSelectedData({ selectedEvent });
 
     return (
         <div className="px-4 py-6 w-full flex flex-col bg-space-background sm:w-4/5 sm:mx-auto md:w-[70%] lg:w-[80%]">
@@ -74,30 +75,39 @@ export default function Panel({ itemType }: Props) {
                         <div className="text-lg">comets</div>
                     </div>
                 </div>
-                {/* <div className="w-1/3 h-16 bg-space-button rounded-lg"></div> */}
             </div>
             <div className="flex flex-row justify-start items-center h-16">
                 <div className="flex flex-col items-start gap-1">
-                    <div className="text-2xl">{item[itemType].title}s</div>
-                    { item[itemType].name && <div className="text-sm md:text-base md:font-semibold font-bold text-space-text-secondary">323P/SOHO</div> }
+                    <div className="text-2xl">{item[itemType].title}</div>
+                    <div className="text-sm md:text-base md:font-semibold font-bold text-space-text-secondary">
+                        {
+                            loading || !data ?
+                            <div className="h-5 bg-space-button-active rounded-full w-32 mt-1 animate-pulse"></div> :
+                            data.object?.fullname
+                        }
+                    </div>
                 </div>
             </div>
             <div className="flex flex-row pt-4">
                 <div className="h-52 w-1/3 min-w-[150px] sm:min-w-[180px] bg-black/20 rounded-3xl flex justify-center items-center">
                     {itemType === 'comet' && <Comet />}
                     {itemType === 'asteroid' && <Asteroid />}
-                    {itemType === 'solarEclipse' && <SolarEclipse />}
-                    {itemType === 'lunarEclipse' && <LunarEclipse />}
+                    {/* {itemType === 'solarEclipse' && <SolarEclipse />}
+                    {itemType === 'lunarEclipse' && <LunarEclipse />} */}
                 </div>
                 <ul className="w-2/3 mx-6 my-4 flex flex-col md:flex-row flex-nowrap md:mx-8 md:flex-wrap md:pl-8 md:border-l border-space-border">
-                    {mappedInfo}
+                    {
+                        loading || !data ?
+                        <HomeDataSkeleton /> :
+                        <DataList data={data} />
+                    }
                 </ul>
             </div>
-            <div className="flex flex-row justify-center gap-2 mt-4">
-                <div className="w-2 h-2 rounded-full bg-slate-400"></div>
-                <div className="w-2 h-2 rounded-full border border-slate-400"></div>
-                <div className="w-2 h-2 rounded-full border border-slate-400"></div>
-            </div>
+            {/* <div className="flex flex-row justify-center gap-2 mt-4">
+                <div className="w-2 h-2 rounded-full bg-space-text-secondary"></div>
+                <div className="w-2 h-2 rounded-full border border-space-text-secondary"></div>
+                <div className="w-2 h-2 rounded-full border border-space-text-secondary"></div>
+            </div> */}
             <a href={item[itemType].route} className="mt-6 transition-colors hover:cursor-pointer p-3 rounded-md text-sm flex justify-center
                 bg-space-button hover:bg-space-button-hover active:bg-space-button-active
                 lg:w-64 lg:mx-auto">

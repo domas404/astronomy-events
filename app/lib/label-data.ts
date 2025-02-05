@@ -12,7 +12,10 @@ export const smallBodyLabelMap: Labels = {
     period: 'Period',
     discovered: 'Discovered',
     last_perihelion: 'Last perihelion',
-    orbital_speed: 'Orbital speed'
+    orbital_speed: 'Orbital speed',
+    closest_approach: 'Closest approach',
+    visibility: 'Visibility',
+    next_perihelion: 'Next perihelion',
 }
 
 export const smallBodyLabelExplanationMap: Labels = {

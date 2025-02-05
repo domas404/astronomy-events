@@ -55,7 +55,7 @@ export default function Table({ selectedEvent, updateSelectedEvent, data, loadin
                     <>
                         {mappedCometList}
                         <tr className="flex flex-col mx-4 py-2">
-                            <td className="text-xs text-space-text-secondary">Showing {data?.count} of {data?.total} rows</td>
+                            <td className="text-xs text-space-text-secondary">Showing {data?.count} closest objects</td>
                             <td className="text-xs text-space-text-secondary">{data?.signature.source}</td>
                         </tr>
                     </>

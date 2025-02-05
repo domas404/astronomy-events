@@ -3,9 +3,9 @@
 import { useEffect, useState } from "react";
 import { useFetchClosestBodiesQuery } from "../lib/redux/features/nasaApi";
 
-export function useAsteroids() {
+export function useBodies({ kind, limit }: { kind: 'a' | 'c', limit: number }) {
 
-    const { data, error, isLoading } = useFetchClosestBodiesQuery({ kind: 'a', limit: 10 });
+    const { data, error, isLoading } = useFetchClosestBodiesQuery({ kind, limit });
     const [loading, setLoading] = useState(true);
     const [errorMessage, setErrorMessage] = useState<undefined | string>(undefined);
 

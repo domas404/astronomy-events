@@ -36,3 +36,16 @@ export const MainDataSkeleton = () => {
     });
     return mappedSkeleton;
 }
+
+export const HomeDataSkeleton = () => {
+    const skeletonData = Array(6).fill(null);
+    const mappedSkeleton = skeletonData.map((_, index) => {
+        return (
+            <li key={index} className={`${index > 2 && 'hidden md:block'} md:basis-1/2 py-2 animate-pulse`}>
+                <div className="h-4 w-24 rounded-full bg-space-button-active mb-2"></div>
+                <div className="h-4 w-20 rounded-full bg-space-button-active"></div>
+            </li>
+        )
+    });
+    return mappedSkeleton;
+}
