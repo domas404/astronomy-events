@@ -1,12 +1,12 @@
 'use client';
 
 import { useAstroEvents } from "@/app/hooks/useAstroEvents";
-import { useLocation } from "@/app/hooks/useLocation";
 import { AstronomyApiResponse } from "@/app/lib/types/astronomy-api";
 import { useEffect } from "react";
 import { SolarEclipse } from "../ui/Illustrations";
 import { HomeDataItem } from "../small-body/DataView";
 import { HomeDataSkeleton } from "../skeletons/Skeletons";
+import { useAppSelector } from "@/app/lib/redux/hooks";
 
 type DataToDisplay = {
     [key: string]: string | undefined;
@@ -24,13 +24,13 @@ const DataList = ({ data }: { data: AstronomyApiResponse }) => {
 
 export default function SunView() {
 
-    const { data: locationData } = useLocation();
+    const location = useAppSelector((state) => state.location);
 
     const { data, loading } = useAstroEvents({
-        loaded: locationData ? true : false,
+        loaded: (location.latitude && location.longitude) ? true : false,
         body: 'sun',
-        lat: locationData?.lat.toString(),
-        lon: locationData?.lon.toString(),
+        lat: location.latitude?.toString(),
+        lon: location.longitude?.toString(),
         from: '2025-01-01',
         to: '2025-12-31',
         time: '08:00:00'
