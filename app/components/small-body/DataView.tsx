@@ -1,6 +1,6 @@
 import { smallBodyLabelExplanationMap, smallBodyLabelMap } from "@/app/lib/label-data";
 
-const HomeDataItem = ({ id, value, index }: { id: string, value: string, index: number }) => {
+export const HomeDataItem = ({ id, value, index }: { id: string, value: string, index: number }) => {
     return (
         <li className={`${index > 2 && 'hidden md:block'} basis-1/2 p-2 hover:bg-space-button-active rounded-lg group transition-colors`}>
             <div className="mt-14 -ml-2 rounded-lg p-2 invisible group-hover:visible absolute max-w-48

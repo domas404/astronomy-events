@@ -9,14 +9,14 @@ import Location from "./ui/Location";
 const navItems = [
     'asteroids',
     'comets',
-    // 'solar-events',
+    'solar-events',
     // 'lunar-events'
 ];
 
 const navItemNames = [
     'Asteroids',
     'Comets',
-    // 'Solar Events',
+    'Solar Events',
     // 'Lunar Events'
 ];
 
