@@ -1,13 +1,17 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { nasaApi } from './features/nasaApi';
+import { locationApi } from './features/locationApi';
 
 export const makeStore = () => {
     return configureStore({
         reducer: {
             [nasaApi.reducerPath]: nasaApi.reducer,
+            [locationApi.reducerPath]: locationApi.reducer,
         },
         middleware: (getDefaultMiddleware) =>
-            getDefaultMiddleware().concat(nasaApi.middleware),
+            getDefaultMiddleware()
+                .concat(nasaApi.middleware)
+                .concat(locationApi.middleware),
     })
 }
 

@@ -2,8 +2,9 @@
 
 import { usePathname } from "next/navigation"
 import { useState } from "react";
-import { MdOutlineLocationOn } from "react-icons/md";
+
 import { MdMenu } from "react-icons/md";
+import Location from "./ui/Location";
 
 const navItems = [
     'asteroids',
@@ -24,18 +25,6 @@ const Logo = () => {
         <a href="./" className="flex items-center order-2 md:order-1 basis-1/3 justify-center md:justify-start">
             <div className="w-10 h-10 border border-white bg-space-background rounded-full shadow-[0_0_4px] hover:shadow-[0_0_6px_2px] transition-shadow shadow-white"></div>
         </a>
-    );
-}
-
-const Location = () => {
-    return (
-        <div className="flex justify-end items-center order-3 basis-1/3">
-            <div className="flex flex-row h-8 w-20 justify-center items-center border rounded-full text-space-text-secondary  border-space-border  
-                hover:bg-space-button-hover hover:cursor-pointer active:bg-space-button-active">
-                <MdOutlineLocationOn size={18} />
-                <div className="text-sm">Vilnius</div>
-            </div>
-        </div>
     );
 }
 
