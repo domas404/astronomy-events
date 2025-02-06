@@ -14,7 +14,8 @@ export default function Home() {
 				<div className="w-full flex flex-row flex-wrap items-start">
 					<Panel itemType="comet" />
 					<Panel itemType="asteroid" />
-					<EventPanel />
+					<EventPanel eventType="sun" />
+					<EventPanel eventType="moon" />
 					{/* <Panel itemType="solarEclipse" />
 					<Panel itemType="lunarEclipse" /> */}
 				</div>

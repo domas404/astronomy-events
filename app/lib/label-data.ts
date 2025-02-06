@@ -40,6 +40,6 @@ export const smallBodyLabelExplanationMap: Labels = {
     event_type: 'The type of eclipse: full, partial, total or penumbral.',
     date: 'Date of the event.',
     duration: 'Duration of the event.',
-    obscuration: 'The percentage of sun covered by the moon.',
+    obscuration: 'The percentage of body being covered during the peak of the eclipse.',
     startTime: 'Start of the event.'
 }

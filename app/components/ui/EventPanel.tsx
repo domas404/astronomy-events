@@ -2,8 +2,8 @@
 
 import { useAstroEvents } from "@/app/hooks/useAstroEvents";
 import { AstronomyApiResponse, EventHighlights } from "@/app/lib/types/astronomy-api";
-import { useEffect } from "react";
-import { SolarEclipse } from "../ui/Illustrations";
+// import { useEffect } from "react";
+import { LunarEclipse, SolarEclipse } from "../ui/Illustrations";
 import { HomeDataView } from "../small-body/DataView";
 import { HomeDataSkeleton } from "../skeletons/Skeletons";
 import { useAppSelector } from "@/app/lib/redux/hooks";
@@ -83,13 +83,13 @@ const DataList = ({ data }: { data: AstronomyApiResponse }) => {
     return mappedData;
 }
 
-export default function EventPanel() {
+export default function EventPanel({ eventType }: { eventType: 'sun' | 'moon' }) {
 
     const location = useAppSelector((state) => state.location);
 
     const { data, loading } = useAstroEvents({
         loaded: (location.latitude && location.longitude) ? true : false,
-        body: 'sun',
+        body: eventType,
         lat: location.latitude?.toString(),
         lon: location.longitude?.toString(),
         from: '2025-01-01',
@@ -97,38 +97,28 @@ export default function EventPanel() {
         time: '08:00:00'
     });
 
-    useEffect(() => {
-        console.log(data);
-    }, [data]);
+    // useEffect(() => {
+    //     console.log(data);
+    // }, [data]);
 
     return (
         <div className="px-4 py-6 w-full flex flex-col bg-space-background sm:w-4/5 sm:mx-auto md:w-[70%] lg:w-[80%]">
-            <div className="text-3xl capitalize">Solar events</div>
+            <div className="text-3xl capitalize">{eventType === 'sun' ? 'Solar' : 'Lunar'} events</div>
             <div className="flex flex-row gap-2 mt-4 mb-6">
                 <div className="w-1/2 bg-space-button rounded-lg flex flex-col p-3 lg:max-w-[250px]">
-                    <div className="text-sm text-space-text-secondary">Sunrise</div>
+                    <div className="text-sm text-space-text-secondary">{eventType === 'sun' ? 'Sun' : 'Moon'}rise</div>
                     <div className="flex flex-row gap-1 items-end">
                         <div className="text-2xl font-bold">
                             07:30
-                            {/* {
-                                loading || !data ?
-                                '' :
-                                data.data.table.rows[0].cells[0].rise
-                            } */}
                         </div>
                         {/* <div className="text-lg">days</div> */}
                     </div>
                 </div>
                 <div className="w-1/2 bg-space-button rounded-lg flex flex-col p-3 lg:max-w-[250px]">
-                    <div className="text-sm text-space-text-secondary">Sunset</div>
+                    <div className="text-sm text-space-text-secondary">{eventType === 'sun' ? 'Sun' : 'Moon'}set</div>
                     <div className="flex flex-row gap-1 items-end">
                         <div className="text-2xl font-bold">
                             17:30
-                            {/* {
-                                loading || !data ?
-                                '' :
-                                data.data.table.rows[0].cells[0].set
-                            } */}
                         </div>
                         {/* <div className="text-lg">comets</div> */}
                     </div>
@@ -136,7 +126,7 @@ export default function EventPanel() {
             </div>
             <div className="flex flex-row justify-start items-center h-16">
                 <div className="flex flex-col items-start gap-1">
-                    <div className="text-2xl">Nearest solar eclipse</div>
+                    <div className="text-2xl">Nearest {eventType === 'sun' ? 'solar' : 'lunar'} eclipse</div>
                     <div className="text-sm md:text-base md:font-semibold font-bold text-space-text-secondary">
                         {/* {
                             loading || !data ?
@@ -148,7 +138,8 @@ export default function EventPanel() {
             </div>
             <div className="flex flex-row pt-4">
                 <div className="h-52 w-1/3 min-w-[150px] sm:min-w-[180px] bg-black/20 rounded-3xl flex justify-center items-center">
-                    <SolarEclipse />
+                    { eventType === 'sun' && <SolarEclipse /> }
+                    { eventType === 'moon' && <LunarEclipse /> }
                 </div>
                 <ul className="w-2/3 mx-6 my-4 flex flex-col md:flex-row flex-nowrap md:mx-8 md:flex-wrap md:pl-8 md:border-l border-space-border">
                     {
