@@ -1,3 +1,4 @@
+import EventPanel from "./components/ui/EventPanel";
 import Panel from "./components/ui/Panel";
 import { Metadata } from "next";
 
@@ -13,6 +14,7 @@ export default function Home() {
 				<div className="w-full flex flex-row flex-wrap items-start">
 					<Panel itemType="comet" />
 					<Panel itemType="asteroid" />
+					<EventPanel />
 					{/* <Panel itemType="solarEclipse" />
 					<Panel itemType="lunarEclipse" /> */}
 				</div>

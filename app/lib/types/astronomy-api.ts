@@ -1,21 +1,23 @@
-export type EventHighlight = {
+export type Highlight = {
     date: string,
     altitude: number
 }
 
+export type EventHighlights = {
+    partialStart?: Highlight | null,
+    partialEnd?: Highlight | null,
+    totalStart?: Highlight | null,
+    totalEnd?: Highlight | null,
+    penumbralStart?: Highlight | null,
+    penumbralEnd?: Highlight | null,
+    fullStart?: Highlight | null,
+    fullEnd?: Highlight | null,
+    peak?: Highlight | null,
+}
+
 export type EventItem = {
     type: string,
-    eventHighlights: {
-        partialStart?: EventHighlight | null,
-        partialEnd?: EventHighlight | null,
-        totalStart?: EventHighlight | null,
-        totalEnd?: EventHighlight | null,
-        penumbralStart?: EventHighlight | null,
-        penumbralEnd?: EventHighlight | null,
-        fullStart?: EventHighlight | null,
-        fullEnd?: EventHighlight | null,
-        peak?: EventHighlight | null,
-    },
+    eventHighlights: EventHighlights,
     rise?: string,
     set?: string,
     extraInfo?: {
@@ -24,11 +26,11 @@ export type EventItem = {
 }
 
 export type EventRow = {
-    body: {
+    entry: {
         id: string,
         name: string,
     },
-    events: EventItem[]
+    cells: EventItem[]
 }
 
 export type AstronomyApiResponse = {
@@ -44,7 +46,10 @@ export type AstronomyApiResponse = {
                 elevation: string
             }
         },
-        rows: EventRow[]
+        table: {
+            header: string[],
+            rows: EventRow[]
+        }
     }
 }
 

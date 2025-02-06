@@ -58,7 +58,8 @@ export default function Panel({ itemType }: Props) {
     const { data, loading } = useSelectedData({ selectedEvent });
 
     return (
-        <div className="px-4 py-6 w-full flex flex-col bg-space-background sm:w-4/5 sm:mx-auto md:w-[70%] lg:w-[80%]">
+        <div className="px-4 py-6 w-full flex flex-col bg-space-background sm:w-4/5 sm:mx-auto md:w-[70%] lg:w-[80%]
+            border-b border-space-border">
             <div className="text-3xl capitalize">{itemType}s</div>
             <div className="flex flex-row gap-2 mt-4 mb-6">
                 <div className="w-1/2 bg-space-button rounded-lg flex flex-col p-3 lg:max-w-[250px]">
@@ -113,10 +114,7 @@ export default function Panel({ itemType }: Props) {
                 lg:w-64 lg:mx-auto">
                 View all
             </a>
-            {
-                itemType !== 'asteroid' &&
-                <div className="mt-10 h-[1px] bg-space-border"></div>
-            }
+            {/* <div className="mt-10 h-[1px] bg-space-border"></div> */}
         </div>
     )
 }

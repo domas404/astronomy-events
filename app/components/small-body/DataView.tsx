@@ -65,6 +65,46 @@ const formatDiameter = (diameter: string) => {
     return diameter + ' m';
 }
 
+const formatEventType = (eventType: string) => {
+    switch(eventType) {
+        case 'partial_solar_eclipse':
+            return 'Partial';
+        case 'total_solar_eclipse':
+            return 'Total';
+        case 'annular_solar_eclipse':
+            return 'Annular';
+        case 'partial_lunar_eclipse':
+            return 'Partial';
+        case 'total_lunar_eclipse':
+            return 'Total';
+        case 'penumbral_lunar_eclipse':
+            return 'Penumbral';
+        default:
+            return 'No data';
+    }
+}
+
+const formatTime = (time: string) => {
+    const timeInt = parseInt(time);
+    const ms = timeInt % 1000;
+    let s = (timeInt - ms) / 1000;
+    const secs = s % 60;
+    s = (s - secs) / 60;
+    const mins = s % 60;
+    const hrs = (s - mins) / 60;
+    return hrs + 'h ' + mins + 'min';
+}
+
+const formatObscuration = (obscuration: string) => {
+    const obscurationFloat = parseFloat(obscuration);
+    const obscurationPercentage = obscurationFloat*100;
+    return Math.floor(obscurationPercentage) + '%';
+}
+
+const formatStartTime = (startTime: string) => {
+    return startTime.slice(11, 16);
+}
+
 const methodMap: { [key: string]: (value: string) => string } = {
     diameter: formatDiameter,
     aphelion: formatDistance,
@@ -77,6 +117,11 @@ const methodMap: { [key: string]: (value: string) => string } = {
     closest_approach: formatClosestApproach,
     visibility: formatVisibility,
     next_perihelion: formatDate,
+    event_type: formatEventType,
+    date: formatDate,
+    duration: formatTime,
+    obscuration: formatObscuration,
+    startTime: formatStartTime
 }
 
 export const DataView = ({ id, value }: { id: string, value: string | undefined }) => {

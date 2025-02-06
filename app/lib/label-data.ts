@@ -16,6 +16,11 @@ export const smallBodyLabelMap: Labels = {
     closest_approach: 'Closest approach',
     visibility: 'Visibility',
     next_perihelion: 'Next perihelion',
+    event_type: 'Type',
+    date: 'Date',
+    duration: 'Duration',
+    obscuration: 'Obscuration',
+    startTime: 'Start time'
 }
 
 export const smallBodyLabelExplanationMap: Labels = {
@@ -31,5 +36,10 @@ export const smallBodyLabelExplanationMap: Labels = {
     orbital_speed: 'The velocity at which a celestial object travels along its orbital path around another object.',
     next_perihelion: 'The next time object will be at the point of its orbit that is closest to the Earth.',
     visibility: 'How a celestial object can be viewed from the Earth: with a naked eye, a telescope, or not visible at all.',
-    closest_approach: 'The distance from the Earth to the point in an object\'s orbit where it is nearest to Earth.'
+    closest_approach: 'The distance from the Earth to the point in an object\'s orbit where it is nearest to Earth.',
+    event_type: 'The type of eclipse: full, partial, total or penumbral.',
+    date: 'Date of the event.',
+    duration: 'Duration of the event.',
+    obscuration: 'The percentage of sun covered by the moon.',
+    startTime: 'Start of the event.'
 }

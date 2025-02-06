@@ -14,7 +14,7 @@ type DataToDisplay = {
 
 const DataList = ({ data }: { data: AstronomyApiResponse }) => {
     const dataToDisplay: DataToDisplay = {
-        eventType: data.data.rows[0].events[0].type,
+        eventType: data.data.table.rows[0].cells[0].type,
     }
     const mappedData = Object.keys(dataToDisplay).map((key, index) => {
         return <HomeDataItem key={index} id={key} value={dataToDisplay[key] ?? 'No data'} index={index} />
@@ -51,7 +51,7 @@ export default function SunView() {
                             {
                                 loading || !data ?
                                 '' :
-                                data.data.rows[0].events[0].rise
+                                data.data.table.rows[0].cells[0].rise
                             }
                         </div>
                         {/* <div className="text-lg">days</div> */}
@@ -64,7 +64,7 @@ export default function SunView() {
                             {
                                 loading || !data ?
                                 '' :
-                                data.data.rows[0].events[0].set
+                                data.data.table.rows[0].cells[0].set
                             }
                         </div>
                         {/* <div className="text-lg">comets</div> */}
