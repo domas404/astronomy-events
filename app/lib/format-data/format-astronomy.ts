@@ -51,3 +51,12 @@ export const getStartTime = (type: string, eventHighlights: EventHighlights) => 
         return 'No data';
     }
 }
+
+export const getEndTime = (type: string, eventHighlights: EventHighlights) => {
+    const end = eventHighlights[eventTypeMap[type].end as keyof EventHighlights];
+    if (end) {
+        return end.date;
+    } else {
+        return 'No data';
+    }
+}

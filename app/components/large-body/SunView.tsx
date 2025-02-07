@@ -1,5 +1,8 @@
 'use client';
 
+// import Preview from "../small-body/Preview";
+import EventPreview from "./EventPreview";
+
 export default function SunView() {
 
     return (
@@ -9,7 +12,7 @@ export default function SunView() {
             </div>
             <div className="w-full flex flex-col sm:w-4/5 md:w-[70%] lg:w-[90%] lg:flex-row lg:gap-2 xl:w-[80%] xl:gap-8">
                 <div className="w-full flex justify-center lg:basis-1/2">
-                    {/* <Preview selectedEvent={selectedEvent} type={'comet'} /> */}
+                    <EventPreview eventType={'sun'} />
                 </div>
                 <table className="w-full bg-space-background flex flex-col pt-2 pb-4 sm:items-center lg:basis-1/2">
                     {/* <TableHead /> */}

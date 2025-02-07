@@ -1,13 +1,13 @@
-import { smallBodyLabelExplanationMap, smallBodyLabelMap } from "@/app/lib/label-data";
+import { labelMap } from "@/app/lib/label-data";
 
 export const HomeDataItem = ({ id, value, index }: { id: string, value: string, index: number }) => {
     return (
         <li className={`${index > 2 && 'hidden md:block'} basis-1/2 p-2 hover:bg-space-button-active rounded-lg group transition-colors`}>
             <div className="mt-14 -ml-2 rounded-lg p-2 invisible group-hover:visible absolute max-w-48
                 bg-space-button-active transition-all delay-0 group-hover:delay-700 border border-space-border text-sm">
-                {smallBodyLabelExplanationMap[id]}
+                {labelMap[id].description}
             </div>
-            <div className="text-xs text-space-text-secondary uppercase font-bold">{smallBodyLabelMap[id]}</div>
+            <div className="text-xs text-space-text-secondary uppercase font-bold">{labelMap[id].name}</div>
             <div>{value}</div>
         </li>
     )
@@ -18,9 +18,9 @@ const DataItem = ({ id, value }: { id: string, value: string }) => {
         <li className="basis-1/2 p-2 hover:bg-space-button-active rounded-lg group transition-colors">
             <div className="mt-14 -ml-2 rounded-lg p-2 invisible group-hover:visible absolute max-w-48
                 bg-space-button-active transition-all delay-0 group-hover:delay-700 border border-space-border text-sm">
-                {smallBodyLabelExplanationMap[id]}
+                {labelMap[id].description}
             </div>
-            <div className="text-xs text-space-text-secondary uppercase font-bold">{smallBodyLabelMap[id]}</div>
+            <div className="text-xs text-space-text-secondary uppercase font-bold">{labelMap[id].name}</div>
             <div>{value}</div>
         </li>
     )
@@ -105,6 +105,10 @@ const formatStartTime = (startTime: string) => {
     return startTime.slice(11, 16);
 }
 
+const formatAltitude = (altitude: string) => {
+    return altitude + '°';
+}
+
 const methodMap: { [key: string]: (value: string) => string } = {
     diameter: formatDiameter,
     aphelion: formatDistance,
@@ -121,7 +125,9 @@ const methodMap: { [key: string]: (value: string) => string } = {
     date: formatDate,
     duration: formatTime,
     obscuration: formatObscuration,
-    startTime: formatStartTime
+    startTime: formatStartTime,
+    endTime: formatStartTime,
+    peakAltitude: formatAltitude
 }
 
 export const DataView = ({ id, value }: { id: string, value: string | undefined }) => {
