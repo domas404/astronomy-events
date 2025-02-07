@@ -10,7 +10,7 @@ const dataSources: DataSource[] = [
     { title: 'SBDB Close-Approach Data API', link: 'https://ssd-api.jpl.nasa.gov/doc/cad.html' },
     { title: 'SBDB API', link: 'https://ssd-api.jpl.nasa.gov/doc/sbdb.html' },
     // { title: 'Sentry API', link: 'https://ssd-api.jpl.nasa.gov/doc/sentry.html' },
-    // { title: 'Astronomy API', link: 'https://astronomyapi.com/' },
+    { title: 'Astronomy API', link: 'https://astronomyapi.com/' },
 ];
 
 const learnMoreSources: DataSource[] = [

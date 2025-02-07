@@ -10,14 +10,14 @@ const navItems = [
     'asteroids',
     'comets',
     'solar-events',
-    // 'lunar-events'
+    'lunar-events'
 ];
 
 const navItemNames = [
     'Asteroids',
     'Comets',
     'Solar Events',
-    // 'Lunar Events'
+    'Lunar Events'
 ];
 
 const Logo = () => {

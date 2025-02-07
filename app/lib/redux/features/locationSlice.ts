@@ -6,8 +6,8 @@ interface LocationState {
 }
 
 const initialState: LocationState = {
-    latitude: 54,
-    longitude: 25
+    latitude: 54.42,
+    longitude: 25.16
 }
 export const locationSlice = createSlice({
     name: 'location',
