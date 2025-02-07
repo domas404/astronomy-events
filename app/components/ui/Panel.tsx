@@ -93,8 +93,6 @@ export default function Panel({ itemType }: Props) {
                 <div className="h-52 w-1/3 min-w-[150px] sm:min-w-[180px] bg-black/20 rounded-3xl flex justify-center items-center">
                     {itemType === 'comet' && <Comet />}
                     {itemType === 'asteroid' && <Asteroid />}
-                    {/* {itemType === 'solarEclipse' && <SolarEclipse />}
-                    {itemType === 'lunarEclipse' && <LunarEclipse />} */}
                 </div>
                 <ul className="w-2/3 mx-6 my-4 flex flex-col md:flex-row flex-nowrap md:mx-8 md:flex-wrap md:pl-8 md:border-l border-space-border">
                     {
@@ -104,17 +102,11 @@ export default function Panel({ itemType }: Props) {
                     }
                 </ul>
             </div>
-            {/* <div className="flex flex-row justify-center gap-2 mt-4">
-                <div className="w-2 h-2 rounded-full bg-space-text-secondary"></div>
-                <div className="w-2 h-2 rounded-full border border-space-text-secondary"></div>
-                <div className="w-2 h-2 rounded-full border border-space-text-secondary"></div>
-            </div> */}
             <a href={item[itemType].route} className="mt-6 transition-colors hover:cursor-pointer p-3 rounded-md text-sm flex justify-center
                 bg-space-button hover:bg-space-button-hover active:bg-space-button-active
                 lg:w-64 lg:mx-auto">
                 View all
             </a>
-            {/* <div className="mt-10 h-[1px] bg-space-border"></div> */}
         </div>
     )
 }

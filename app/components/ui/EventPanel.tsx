@@ -1,81 +1,25 @@
 'use client';
 
 import { useAstroEvents } from "@/app/hooks/useAstroEvents";
-import { AstronomyApiResponse, EventHighlights } from "@/app/lib/types/astronomy-api";
-// import { useEffect } from "react";
+import { AstronomyApiResponse, EventItem } from "@/app/lib/types/astronomy-api";
 import { LunarEclipse, SolarEclipse } from "../ui/Illustrations";
 import { HomeDataView } from "../small-body/DataView";
 import { HomeDataSkeleton } from "../skeletons/Skeletons";
 import { useAppSelector } from "@/app/lib/redux/hooks";
+import { getStartTime, getDuration } from "@/app/lib/format-data/format-astronomy";
 
 type DataToDisplay = {
     [key: string]: string | undefined;
 }
 
-const calculateDuration = (start: string, end: string) => {
-    const startTime = (new Date(start)).getTime();
-    const endTime = (new Date(end)).getTime();
-    return (endTime - startTime);
-}
-
-const getDuration = (type: string, eventHighlights: EventHighlights) => {
-    switch(type) {
-        case 'partial_solar_eclipse':
-            if (eventHighlights.partialStart && eventHighlights.partialEnd)
-                return calculateDuration(eventHighlights.partialStart.date, eventHighlights.partialEnd.date).toString();
-        case 'total_solar_eclipse':
-            if (eventHighlights.totalStart && eventHighlights.totalEnd)
-                return calculateDuration(eventHighlights.totalStart.date, eventHighlights.totalEnd.date).toString();
-        case 'annular_solar_eclipse':
-            if (eventHighlights.totalStart && eventHighlights.totalEnd)
-                return calculateDuration(eventHighlights.totalStart.date, eventHighlights.totalEnd.date).toString();
-        case 'partial_lunar_eclipse':
-            if (eventHighlights.partialStart && eventHighlights.partialEnd)
-                return calculateDuration(eventHighlights.partialStart.date, eventHighlights.partialEnd.date).toString();
-        case 'total_lunar_eclipse':
-            if (eventHighlights.fullStart && eventHighlights.fullEnd)
-                return calculateDuration(eventHighlights.fullStart.date, eventHighlights.fullEnd.date).toString();
-        case 'penumbral_solar_eclipse':
-            if (eventHighlights.penumbralStart && eventHighlights.penumbralEnd)
-                return calculateDuration(eventHighlights.penumbralStart.date, eventHighlights.penumbralEnd.date).toString();
-        default:
-            return 'No data';
-    }
-}
-
-const getStartTime = (type: string, eventHighlights: EventHighlights) => {
-    switch(type) {
-        case 'partial_solar_eclipse':
-            if (eventHighlights.partialStart)
-                return eventHighlights.partialStart.date;
-        case 'total_solar_eclipse':
-            if (eventHighlights.totalStart)
-                return eventHighlights.totalStart.date;
-        case 'annular_solar_eclipse':
-            if (eventHighlights.totalStart)
-                return eventHighlights.totalStart.date;
-        case 'partial_lunar_eclipse':
-            if (eventHighlights.partialStart)
-                return eventHighlights.partialStart.date;
-        case 'total_lunar_eclipse':
-            if (eventHighlights.fullStart)
-                return eventHighlights.fullStart.date;
-        case 'penumbral_solar_eclipse':
-            if (eventHighlights.penumbralStart)
-                return eventHighlights.penumbralStart.date;
-        default:
-            return 'No data';
-    }
-}
-
 const DataList = ({ data }: { data: AstronomyApiResponse }) => {
-
+    const eventItem: EventItem = data.data.table.rows[0].cells[0];
     const dataToDisplay: DataToDisplay = {
-        event_type: data.data.table.rows[0].cells[0].type,
-        date: data.data.table.rows[0].cells[0].eventHighlights.peak?.date,
-        obscuration: data.data.table.rows[0].cells[0].extraInfo?.obscuration.toString(),
-        duration: getDuration(data.data.table.rows[0].cells[0].type, data.data.table.rows[0].cells[0].eventHighlights),
-        startTime: getStartTime(data.data.table.rows[0].cells[0].type, data.data.table.rows[0].cells[0].eventHighlights)
+        event_type: eventItem.type,
+        date: eventItem.eventHighlights.peak?.date,
+        obscuration: eventItem.extraInfo?.obscuration.toString(),
+        duration: getDuration(eventItem.type, eventItem.eventHighlights),
+        startTime: getStartTime(eventItem.type, eventItem.eventHighlights)
     }
     const mappedData = Object.keys(dataToDisplay).map((key, index) => {
         return <HomeDataView key={index} id={key} value={dataToDisplay[key] ?? 'No data'} index={index} />
