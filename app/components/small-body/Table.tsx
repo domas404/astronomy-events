@@ -32,7 +32,6 @@ export default function Table({ selectedEvent, updateSelectedEvent, data, loadin
 
     return (
         <tbody className="flex flex-col bg-space-background w-full">
-            {/* <TableSkeleton /> */}
             {
                 loading ?
                 <>

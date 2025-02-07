@@ -85,9 +85,6 @@ export default function EventPreview({ eventType }: Props) {
                     </ul>
                 </div>
             </section>
-            {/* <div className="flex-col text-xs -mt-3 ml-2 text-space-text-secondary">
-                <div>1 AU - a unit of measurement equal to the average distance from the Earth to the Sun {'(~150M km)'}.</div>
-            </div> */}
         </div>
     )
 }
