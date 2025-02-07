@@ -51,7 +51,8 @@ export default function EventPreview({ eventType }: Props) {
                     loading || !data ?
                     <div className="h-6 bg-space-button-active rounded-full w-32 mt-1 animate-pulse"></div> :
                     <h2 className="text-base md:text-lg md:font-semibold font-bold text-space-text-secondary">
-                        { data.data.table.header[0].slice(0, 10) }
+                        {/* The { data.data.table.header[0].slice(0, 10) } { eventType === 'sun' ? 'solar' : 'lunar' } eclipse */}
+                        Nearest { eventType === 'sun' ? 'solar' : 'lunar' } eclipse
                     </h2>
                 }
             </header>
@@ -84,9 +85,9 @@ export default function EventPreview({ eventType }: Props) {
                     </ul>
                 </div>
             </section>
-            <div className="flex-col text-xs -mt-3 ml-2 text-space-text-secondary">
+            {/* <div className="flex-col text-xs -mt-3 ml-2 text-space-text-secondary">
                 <div>1 AU - a unit of measurement equal to the average distance from the Earth to the Sun {'(~150M km)'}.</div>
-            </div>
+            </div> */}
         </div>
     )
 }
