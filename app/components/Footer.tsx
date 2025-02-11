@@ -1,4 +1,5 @@
 import { FaGithub } from "react-icons/fa";
+import Language from "./ui/Language";
 
 type DataSource = {
     title: string,
@@ -24,16 +25,6 @@ const LinkItem = ({ item }: LinkItemProps) => {
         <li className="hover:text-space-text transition-colors">
             <a href={item.link} target="_blank">{item.title}</a>
         </li>
-    );
-}
-
-const Language = () => {
-    return (
-        <div className="flex flex-row gap-2 h-8 items-center rounded-full px-3 text-sm">
-            <div className="font-bold w-5 flex justify-end">EN</div>
-            <div className="w-px bg-space-border h-4"></div>
-            <div className="w-5 text-space-text-secondary hover:text-space-text hover:cursor-pointer">LT</div>
-        </div>
     );
 }
 
