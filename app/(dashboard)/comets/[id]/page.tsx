@@ -1,7 +1,7 @@
 import Preview from "@/app/components/small-body/Preview";
 import { fetchSelectedBody } from "@/app/lib/utils/getNasaData";
 
-export default async function SelectedComet({ params }: { params: { id: string } }) {
+export default async function SelectedComet({ params }: { params: Promise<{ id: string }> }) {
 
     const { id } = await params;
     const selectedBody = await fetchSelectedBody({ des: id });
