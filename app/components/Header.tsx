@@ -37,7 +37,7 @@ export default function Header() {
         return (
             <li key={index} className='flex mx-2 md:w-[116px] md:justify-center md:mx-0'>
                 <a
-                    href={`./${item}`}
+                    href={`/${item}`}
                     className={`w-full flex items-center p-4 rounded-md text-slate-200 
                         hover:cursor-pointer hover:text-white hover:bg-space-button-hover active:bg-space-button-active transition-colors
                         md:w-[108px] md:justify-center md:p-1 md:rounded-full

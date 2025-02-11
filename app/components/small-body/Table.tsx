@@ -1,22 +1,23 @@
-'use client';
+// 'use client';
 
 import TableRow from "./TableRow";
 import { TableSkeleton } from "../skeletons/Skeletons";
 import { TableError } from "../errors/Errors";
-import { CloseApproachData, CometApiData } from "@/app/lib/types";
+import { CometApiData } from "@/app/lib/types";
 
 type Props = {
-    selectedEvent: CloseApproachData | undefined,
-    updateSelectedEvent: (des: string) => void,
+    // selectedEvent: CloseApproachData | undefined,
+    // updateSelectedEvent: (des: string) => void,
     data: CometApiData | undefined,
     loading: boolean,
-    errorMessage: string | undefined
+    errorMessage: string | undefined,
+    kind: 'a' | 'c',
 }
 
-export default function Table({ selectedEvent, updateSelectedEvent, data, loading, errorMessage }: Props) {
+export default function Table({ data, loading, errorMessage, kind }: Props) {
     
     const mappedCometList = data?.data.map((item, index) => {
-        const selectedDes = selectedEvent?.des;
+        // const selectedDes = selectedEvent?.des;
         return (
             <TableRow
                 key={index}
@@ -24,8 +25,9 @@ export default function Table({ selectedEvent, updateSelectedEvent, data, loadin
                 name={item.fullname}
                 date={item.cd}
                 dist={item.dist}
-                selected={item.des === selectedDes}
-                updateSelectedEvent={updateSelectedEvent}
+                selected={false}
+                kind={kind}
+                // updateSelectedEvent={updateSelectedEvent}
             />
         );
     });

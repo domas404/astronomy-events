@@ -1,9 +1,7 @@
-'use client';
-
 import { Asteroid, Comet } from "../ui/Illustrations";
-import { CloseApproachData } from "@/app/lib/types";
+// import { CloseApproachData } from "@/app/lib/types";
 import { SBDB_Data } from "@/app/lib/types/SBDB";
-import { useSelectedData } from "@/app/hooks/useSelectedData";
+// import { useSelectedData } from "@/app/hooks/useSelectedData";
 import { DataListSkeleton, MainDataSkeleton } from "../skeletons/Skeletons";
 import { DataView } from "./DataView";
 
@@ -29,13 +27,14 @@ const DataList = ({ data }: { data: SBDB_Data }) => {
 }
 
 type Props = {
-    selectedEvent: CloseApproachData | undefined,
+    data: SBDB_Data | undefined,
+    loading: boolean,
     type: 'comet' | 'asteroid',
 }
 
-export default function Preview({ selectedEvent, type }: Props) {
+export default function Preview({ data, loading, type }: Props) {
 
-    const { data, loading } = useSelectedData({ selectedEvent });
+    // const { data, loading } = useSelectedData({ selectedEvent });
     
     return (
         <div className="flex flex-col p-4 gap-6 w-full">
