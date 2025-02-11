@@ -7,6 +7,7 @@ import { HomeDataView } from "../small-body/DataView";
 import { HomeDataSkeleton } from "../skeletons/Skeletons";
 import { useAppSelector } from "@/app/lib/redux/hooks";
 import { getStartTime, getDuration } from "@/app/lib/format-data/format-astronomy";
+import Card from "./Card";
 
 type DataToDisplay = {
     [key: string]: string | undefined;
@@ -50,24 +51,17 @@ export default function EventPanel({ eventType }: { eventType: 'sun' | 'moon' })
             ${eventType === 'sun' && 'border-b border-space-border'}`}>
             <div className="text-3xl capitalize">{eventType === 'sun' ? 'Solar' : 'Lunar'} events</div>
             <div className="flex flex-row gap-2 mt-4 mb-6">
-                <div className="w-1/2 bg-space-button rounded-lg flex flex-col p-3 lg:max-w-[250px]">
-                    <div className="text-sm text-space-text-secondary">{eventType === 'sun' ? 'Sun' : 'Moon'}rise</div>
-                    <div className="flex flex-row gap-1 items-end">
-                        <div className="text-2xl font-bold">
-                            07:30
-                        </div>
-                        {/* <div className="text-lg">days</div> */}
-                    </div>
-                </div>
-                <div className="w-1/2 bg-space-button rounded-lg flex flex-col p-3 lg:max-w-[250px]">
-                    <div className="text-sm text-space-text-secondary">{eventType === 'sun' ? 'Sun' : 'Moon'}set</div>
-                    <div className="flex flex-row gap-1 items-end">
-                        <div className="text-2xl font-bold">
-                            17:30
-                        </div>
-                        {/* <div className="text-lg">comets</div> */}
-                    </div>
-                </div>
+                {
+                    eventType === 'sun' ?
+                    <>
+                        <Card title={'Sunrise'} value={'07:30'} />
+                        <Card title={'Sunset'} value={'17:30'} />
+                    </> :
+                    <>
+                        <Card title={'Moonrise'} value={'11:00'} />
+                        <Card title={'Moonset'} value={'21:00'} />
+                    </>
+                }
             </div>
             <div className="flex flex-row justify-start items-center h-16">
                 <div className="flex flex-col items-start gap-1">

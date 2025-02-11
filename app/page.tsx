@@ -12,12 +12,10 @@ export default function Home() {
 			bg-space-background lg:border-space-border lg:w-[90%] md:max-w-[1200px]">
 			<main className="w-full flex flex-col items-center gap-8">
 				<div className="w-full flex flex-row flex-wrap items-start">
-					<Panel itemType="comet" />
-					<Panel itemType="asteroid" />
+					<Panel kind="c" />
+					<Panel kind="a" />
 					<EventPanel eventType="sun" />
 					<EventPanel eventType="moon" />
-					{/* <Panel itemType="solarEclipse" />
-					<Panel itemType="lunarEclipse" /> */}
 				</div>
 			</main>
 		</div>
