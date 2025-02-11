@@ -1,9 +1,13 @@
+'use client';
+
 import { Asteroid, Comet } from "../ui/Illustrations";
 // import { CloseApproachData } from "@/app/lib/types";
 import { SBDB_Data } from "@/app/lib/types/SBDB";
 // import { useSelectedData } from "@/app/hooks/useSelectedData";
 import { DataListSkeleton, MainDataSkeleton } from "../skeletons/Skeletons";
 import { DataView } from "./DataView";
+import { additionalInfo } from "@/app/lib/locale-text/ui-text";
+import { useAppSelector } from "@/app/lib/redux/hooks";
 
 type DataToDisplay = {
     [key: string]: string | undefined;
@@ -35,6 +39,7 @@ type Props = {
 export default function Preview({ data, loading, type }: Props) {
 
     // const { data, loading } = useSelectedData({ selectedEvent });
+    const { language } = useAppSelector((state) => state.language);
     
     return (
         <div className="flex flex-col p-4 gap-6 w-full">
@@ -77,7 +82,7 @@ export default function Preview({ data, loading, type }: Props) {
                 </div>
             </section>
             <div className="flex-col text-xs -mt-3 ml-2 text-space-text-secondary">
-                <div>1 AU - a unit of measurement equal to the average distance from the Earth to the Sun {'(~150M km)'}.</div>
+                <div>{additionalInfo[language].au}</div>
             </div>
         </div>
     )

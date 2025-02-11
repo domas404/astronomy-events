@@ -1,6 +1,6 @@
 'use client';
 
-import { labelMap } from "@/app/lib/label-data";
+import { labelMap } from "@/app/lib/locale-text/label-text";
 import { methodMap } from "@/app/lib/format-data/format-data";
 import { useAppSelector } from "@/app/lib/redux/hooks";
 

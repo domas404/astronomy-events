@@ -8,6 +8,7 @@ import { HomeDataSkeleton } from "../skeletons/Skeletons";
 import { useAppSelector } from "@/app/lib/redux/hooks";
 import { getStartTime, getDuration } from "@/app/lib/format-data/format-astronomy";
 import Card from "./Card";
+import { headerText } from "@/app/lib/locale-text/ui-text";
 
 type DataToDisplay = {
     [key: string]: string | undefined;
@@ -31,6 +32,7 @@ const DataList = ({ data }: { data: AstronomyApiResponse }) => {
 export default function EventPanel({ eventType }: { eventType: 'sun' | 'moon' }) {
 
     const location = useAppSelector((state) => state.location);
+    const { language } = useAppSelector((state) => state.language);
 
     const { data, loading } = useAstroEvents({
         loaded: (location.latitude && location.longitude) ? true : false,
@@ -49,7 +51,7 @@ export default function EventPanel({ eventType }: { eventType: 'sun' | 'moon' })
     return (
         <div className={`px-4 py-6 w-full flex flex-col bg-space-background sm:w-4/5 sm:mx-auto md:w-[70%] lg:w-[80%]
             ${eventType === 'sun' && 'border-b border-space-border'}`}>
-            <div className="text-3xl capitalize">{eventType === 'sun' ? 'Solar' : 'Lunar'} events</div>
+            <div className="text-3xl capitalize">{eventType === 'sun' ? headerText[language].solarEvents : headerText[language].lunarEvents}</div>
             <div className="flex flex-row gap-2 mt-4 mb-6">
                 {
                     eventType === 'sun' ?

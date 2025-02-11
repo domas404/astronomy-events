@@ -8,6 +8,8 @@ import { useSelectedBody } from "@/app/hooks/useSelectedBody";
 import { useSelectedData } from "@/app/hooks/useSelectedData";
 import { HomeDataSkeleton } from "../skeletons/Skeletons";
 import Card from "./Card";
+import { useAppSelector } from "@/app/lib/redux/hooks";
+import { headerText, homePanelText } from "@/app/lib/locale-text/ui-text";
 
 type DataToDisplay = {
     [key: string]: string | undefined;
@@ -33,11 +35,12 @@ export default function Panel({ kind }: { kind: 'c' | 'a' }) {
     const { data: bodiesData, loading: bodiesLoading } = useBodies({ kind, limit: 1 });
     const { selectedEvent } = useSelectedBody({ data: bodiesData, loading: bodiesLoading });
     const { data, loading } = useSelectedData({ selectedEvent });
+    const { language } = useAppSelector((state) => state.language);
 
     return (
         <div className="px-4 py-6 w-full flex flex-col bg-space-background sm:w-4/5 sm:mx-auto md:w-[70%] lg:w-[80%]
             border-b border-space-border">
-            <div className="text-3xl capitalize">{ kind === 'c' ? 'Comets' : 'Asteroids' }</div>
+            <div className="text-3xl capitalize">{ kind === 'c' ? headerText[language].comets : headerText[language].asteroids }</div>
             <div className="flex flex-row gap-2 mt-4 mb-6">
                 {
                     kind === 'c' ?
@@ -53,7 +56,9 @@ export default function Panel({ kind }: { kind: 'c' | 'a' }) {
             </div>
             <div className="flex flex-row justify-start items-center h-16">
                 <div className="flex flex-col items-start gap-1">
-                    <div className="text-2xl">Nearest {kind === 'c' ? 'comet' : 'asteroid'}</div>
+                    <div className="text-2xl">
+                        { kind === 'c' ? homePanelText[language].nearestComet : homePanelText[language].nearestAsteroid }
+                    </div>
                     <div className="text-sm md:text-base md:font-semibold font-bold text-space-text-secondary">
                         {
                             loading || !data ?

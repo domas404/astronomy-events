@@ -5,19 +5,21 @@ import { useState } from "react";
 
 import { MdMenu } from "react-icons/md";
 import Location from "./ui/Location";
+import { useAppSelector } from "../lib/redux/hooks";
+import { headerText } from "../lib/locale-text/ui-text";
 
 const navItems = [
     'asteroids',
     'comets',
-    'solar-events',
-    'lunar-events'
+    'solarEvents',
+    'lunarEvents'
 ];
 
-const navItemNames = [
-    'Asteroids',
-    'Comets',
-    'Solar Events',
-    'Lunar Events'
+const navItemRoutes = [
+    'asteroids',
+    'comets',
+    'solar-events',
+    'lunar-events'
 ];
 
 const Logo = () => {
@@ -32,18 +34,19 @@ export default function Header() {
 
     const pathname = usePathname();
     const [menuOpen, setMenuOpen] = useState(false);
+    const { language } = useAppSelector((state) => state.language);
 
     const mappedNavItems = navItems.map((item, index) => {
         return (
             <li key={index} className='flex mx-2 md:w-[116px] md:justify-center md:mx-0'>
                 <a
-                    href={`/${item}`}
+                    href={`/${navItemRoutes[index]}`}
                     className={`w-full flex items-center p-4 rounded-md text-slate-200 
                         hover:cursor-pointer hover:text-white hover:bg-space-button-hover active:bg-space-button-active transition-colors
                         md:w-[108px] md:justify-center md:p-1 md:rounded-full
                         ${pathname === `/${item}` ? 'bg-space-button-active' : 'bg-space-background'}`}
                 >
-                    {navItemNames[index]}
+                    {headerText[language][item]}
                 </a>
             </li>
         );

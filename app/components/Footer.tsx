@@ -1,5 +1,9 @@
+'use client';
+
 import { FaGithub } from "react-icons/fa";
 import Language from "./ui/Language";
+import { useAppSelector } from "../lib/redux/hooks";
+import { footerText } from "../lib/locale-text/ui-text";
 
 type DataSource = {
     title: string,
@@ -30,6 +34,7 @@ const LinkItem = ({ item }: LinkItemProps) => {
 
 export default function Footer() {
 
+    const { language } = useAppSelector((state) => state.language);
     const mappedDataSources = dataSources.map((item, index) => {
         return (
             <LinkItem key={index} item={item} />
@@ -48,13 +53,13 @@ export default function Footer() {
                 <div className="w-full flex flex-col md:flex-row px-10 gap-8 justify-between">
                     <div className="w-full flex flex-col gap-8 sm:flex-row justify-between md:basis-2/3">
                         <div className="w-full">
-                            <div className="font-semibold mb-4">Data sources</div>
+                            <div className="font-semibold mb-4">{footerText[language].dataSources}</div>
                             <ul className="text-sm text-space-text-secondary">
                                 {mappedDataSources}
                             </ul>
                         </div>
                         <div className="w-full">
-                            <div className="font-semibold mb-4">Learn more</div>
+                            <div className="font-semibold mb-4">{footerText[language].learnMore}</div>
                             <ul className="text-sm text-space-text-secondary">
                                 {mappedLearnMore}
                             </ul>
