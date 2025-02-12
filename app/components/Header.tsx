@@ -7,6 +7,7 @@ import { MdMenu } from "react-icons/md";
 import Location from "./ui/Location";
 import { useAppSelector } from "../lib/redux/hooks";
 import { headerText } from "../lib/locale-text/ui-text";
+import Link from "next/link";
 
 const navItems = [
     'asteroids',
@@ -24,9 +25,9 @@ const navItemRoutes = [
 
 const Logo = () => {
     return (
-        <a href="./" className="flex items-center order-2 md:order-1 basis-1/3 justify-center md:justify-start">
+        <Link href="/" className="flex items-center order-2 md:order-1 basis-1/3 justify-center md:justify-start">
             <div className="w-10 h-10 border border-white bg-space-background rounded-full shadow-[0_0_4px] hover:shadow-[0_0_6px_2px] transition-shadow shadow-white"></div>
-        </a>
+        </Link>
     );
 }
 
