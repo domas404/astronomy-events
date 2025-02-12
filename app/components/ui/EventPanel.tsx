@@ -1,14 +1,15 @@
-'use client';
+// 'use client';
 
-import { useAstroEvents } from "@/app/hooks/useAstroEvents";
+// import { useAstroEvents } from "@/app/hooks/useAstroEvents";
 import { AstronomyApiResponse, EventItem } from "@/app/lib/types/astronomy-api";
 import { LunarEclipse, SolarEclipse } from "../ui/Illustrations";
 import { HomeDataView } from "../small-body/DataView";
-import { HomeDataSkeleton } from "../skeletons/Skeletons";
-import { useAppSelector } from "@/app/lib/redux/hooks";
+// import { HomeDataSkeleton } from "../skeletons/Skeletons";
+// import { useAppSelector } from "@/app/lib/redux/hooks";
 import { getStartTime, getDuration } from "@/app/lib/format-data/format-astronomy";
 import Card from "./Card";
-import { headerText } from "@/app/lib/locale-text/ui-text";
+// import { headerText } from "@/app/lib/locale-text/ui-text";
+import { fetchBodyEvents } from "@/app/lib/utils/getAstronomyData";
 
 type DataToDisplay = {
     [key: string]: string | undefined;
@@ -29,16 +30,20 @@ const DataList = ({ data }: { data: AstronomyApiResponse }) => {
     return mappedData;
 }
 
-export default function EventPanel({ eventType }: { eventType: 'sun' | 'moon' }) {
+export default async function EventPanel({ eventType }: { eventType: 'sun' | 'moon' }) {
 
-    const location = useAppSelector((state) => state.location);
-    const { language } = useAppSelector((state) => state.language);
+    // const location = useAppSelector((state) => state.location);
+    // const { language } = useAppSelector((state) => state.language);
 
-    const { data, loading } = useAstroEvents({
-        loaded: (location.latitude && location.longitude) ? true : false,
+    const initialLocation = {
+        lat: 54.42,
+        lon: 25.16
+    }
+
+    const data = await fetchBodyEvents({
         body: eventType,
-        lat: location.latitude?.toString(),
-        lon: location.longitude?.toString(),
+        lat: initialLocation.lat.toString(),
+        lon: initialLocation.lon.toString(),
         from: '2025-01-01',
         to: '2025-12-31',
         time: '08:00:00'
@@ -51,7 +56,7 @@ export default function EventPanel({ eventType }: { eventType: 'sun' | 'moon' })
     return (
         <div className={`px-4 py-6 w-full flex flex-col bg-space-background sm:w-4/5 sm:mx-auto md:w-[70%] lg:w-[80%]
             ${eventType === 'sun' && 'border-b border-space-border'}`}>
-            <div className="text-3xl capitalize">{eventType === 'sun' ? headerText[language].solarEvents : headerText[language].lunarEvents}</div>
+            {/* <div className="text-3xl capitalize">{eventType === 'sun' ? headerText[language].solarEvents : headerText[language].lunarEvents}</div> */}
             <div className="flex flex-row gap-2 mt-4 mb-6">
                 {
                     eventType === 'sun' ?
@@ -83,11 +88,8 @@ export default function EventPanel({ eventType }: { eventType: 'sun' | 'moon' })
                     { eventType === 'moon' && <LunarEclipse /> }
                 </div>
                 <ul className="w-2/3 mx-6 my-4 flex flex-col md:flex-row flex-nowrap md:mx-8 md:flex-wrap md:pl-8 md:border-l border-space-border">
-                    {
-                        loading || !data ?
-                        <HomeDataSkeleton /> :
+
                         <DataList data={data} />
-                    }
                 </ul>
             </div>
             <a href={eventType === 'sun' ? '/solar-events': '/lunar-events'} className="mt-6 transition-colors hover:cursor-pointer p-3 rounded-md text-sm flex justify-center

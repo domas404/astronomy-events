@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { AstronomyApiResponse } from "../../types/astronomy-api";
 
 const BASE_URL = 'https://api.astronomyapi.com/api/v2/bodies/events';
-const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
+const API_KEY = process.env.API_KEY;
 
 export const astronomyApi = createApi({
 	reducerPath: 'astronomyApi',
