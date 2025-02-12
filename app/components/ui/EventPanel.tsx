@@ -7,6 +7,7 @@ import { fetchBodyEvents } from "@/app/lib/utils/getAstronomyData";
 import { fetchIpgeoData } from "@/app/lib/utils/getIpgeoData";
 import TextPrimary from "./TextPrimary";
 import TextSecondary from "./TextSecondary";
+import ViewMoreButton from "./ViewMoreButton";
 
 type DataToDisplay = {
     [key: string]: string | undefined;
@@ -49,35 +50,27 @@ export default async function EventPanel({ eventType }: { eventType: 'sun' | 'mo
     });
 
     return (
-        <div className={`px-4 py-6 w-full flex flex-col bg-space-background sm:w-4/5 sm:mx-auto md:w-[70%] lg:w-[80%]
+        <div className={`px-4 py-10 w-full flex flex-col bg-space-background sm:w-4/5 sm:mx-auto md:w-[70%] lg:w-[80%]
             ${eventType === 'sun' && 'border-b border-space-border'}`}>
             <TextPrimary eventType={eventType} />
-            <div className="flex flex-row gap-2 mt-4 mb-6">
+            <div className="flex flex-row flex-wrap mt-4 mb-6 gap-2">
                 {
                     eventType === 'sun' ?
                     <>
-                        <Card title={'Sunrise'} value={ipgeoData.sunrise} />
-                        <Card title={'Sunset'} value={ipgeoData.sunset} />
-                        <Card title={'Day length'} value={ipgeoData.day_length} />
+                        <Card title={'sunrise'} value={ipgeoData.sunrise} />
+                        <Card title={'sunset'} value={ipgeoData.sunset} />
+                        <Card title={'dayLength'} value={ipgeoData.day_length} cardFull />
                     </> :
                     <>
-                        <Card title={'Moonrise'} value={ipgeoData.moonrise} />
-                        <Card title={'Moonset'} value={ipgeoData.moonset} />
-                        <Card title={'Moon phase'} value={ipgeoData.moon_phase} />
+                        <Card title={'moonrise'} value={ipgeoData.moonrise} />
+                        <Card title={'moonset'} value={ipgeoData.moonset} />
+                        <Card title={'moonPhase'} value={ipgeoData.moon_phase} cardFull />
                     </>
                 }
             </div>
-            <div className="flex flex-row justify-start items-center h-16">
+            <div className="flex flex-row justify-start items-end h-10">
                 <div className="flex flex-col items-start gap-1">
                     <TextSecondary eventType={eventType} />
-                    {/* <div className="text-2xl">Nearest {eventType === 'sun' ? 'solar' : 'lunar'} eclipse</div> */}
-                    <div className="text-sm md:text-base md:font-semibold font-bold text-space-text-secondary">
-                        {/* {
-                            loading || !data ?
-                            <div className="h-5 bg-space-button-active rounded-full w-32 mt-1 animate-pulse"></div> :
-                            data.object?.fullname
-                        } */}
-                    </div>
                 </div>
             </div>
             <div className="flex flex-row pt-4">
@@ -90,11 +83,7 @@ export default async function EventPanel({ eventType }: { eventType: 'sun' | 'mo
                         <DataList data={data} />
                 </ul>
             </div>
-            <a href={eventType === 'sun' ? '/solar-events': '/lunar-events'} className="mt-6 transition-colors hover:cursor-pointer p-3 rounded-md text-sm flex justify-center
-                bg-space-button hover:bg-space-button-hover active:bg-space-button-active
-                lg:w-64 lg:mx-auto">
-                View all
-            </a>
+            <ViewMoreButton eventType={eventType} />
         </div>
     );
 }

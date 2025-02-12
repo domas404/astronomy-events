@@ -17,8 +17,8 @@ const headingMap: HeadingType = {
         a: 'Asteroids'
     },
     lt: {
-        sun: 'Saulės reiškiniai',
-        moon: 'Mėnulio reiškiniai',
+        sun: 'Saulė',
+        moon: 'Mėnulis',
         c: 'Kometos',
         a: 'Asteroidai'
     }

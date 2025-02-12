@@ -25,8 +25,8 @@ export const headerText: TextItem = {
     lt: {
         asteroids: 'Asteroidai',
         comets: 'Kometos',
-        solarEvents: 'Saulės įvykiai',
-        lunarEvents: 'Mėnulio įvykiai',
+        solarEvents: 'Saulė',
+        lunarEvents: 'Mėnulis',
     }
 }
 
