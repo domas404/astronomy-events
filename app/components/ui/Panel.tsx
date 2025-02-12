@@ -9,6 +9,8 @@ import { HomeDataView } from "../small-body/DataView";
 // import { HomeDataSkeleton } from "../skeletons/Skeletons";
 import Card from "./Card";
 import { fetchClosestBodies, fetchSelectedBody } from "@/app/lib/utils/getNasaData";
+import TextPrimary from "./TextPrimary";
+import TextSecondary from "./TextSecondary";
 // import { useAppSelector } from "@/app/lib/redux/hooks";
 // import { headerText, homePanelText } from "@/app/lib/locale-text/ui-text";
 
@@ -44,6 +46,7 @@ export default async function Panel({ kind }: { kind: 'c' | 'a' }) {
     return (
         <div className="px-4 py-6 w-full flex flex-col bg-space-background sm:w-4/5 sm:mx-auto md:w-[70%] lg:w-[80%]
             border-b border-space-border">
+            <TextPrimary eventType={kind} />
             {/* <div className="text-3xl capitalize">{ kind === 'c' ? headerText[language].comets : headerText[language].asteroids }</div> */}
             <div className="flex flex-row gap-2 mt-4 mb-6">
                 {
@@ -61,6 +64,7 @@ export default async function Panel({ kind }: { kind: 'c' | 'a' }) {
             <div className="flex flex-row justify-start items-center h-16">
                 <div className="flex flex-col items-start gap-1">
                     <div className="text-2xl">
+                        <TextSecondary eventType={kind} />
                         {/* { kind === 'c' ? homePanelText[language].nearestComet : homePanelText[language].nearestAsteroid } */}
                     </div>
                     <div className="text-sm md:text-base md:font-semibold font-bold text-space-text-secondary">

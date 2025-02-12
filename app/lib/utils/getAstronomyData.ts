@@ -18,7 +18,7 @@ export async function fetchBodyEvents({
     try {
         const response = await fetch(url, {
             headers: {
-                "Authorization": process.env.API_KEY!.toString(),
+                "Authorization": process.env.ASTRONOMY_API_KEY!.toString(),
             }
         });
         if (!response.ok) {

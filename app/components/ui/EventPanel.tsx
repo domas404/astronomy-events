@@ -1,15 +1,12 @@
-// 'use client';
-
-// import { useAstroEvents } from "@/app/hooks/useAstroEvents";
 import { AstronomyApiResponse, EventItem } from "@/app/lib/types/astronomy-api";
 import { LunarEclipse, SolarEclipse } from "../ui/Illustrations";
 import { HomeDataView } from "../small-body/DataView";
-// import { HomeDataSkeleton } from "../skeletons/Skeletons";
-// import { useAppSelector } from "@/app/lib/redux/hooks";
 import { getStartTime, getDuration } from "@/app/lib/format-data/format-astronomy";
 import Card from "./Card";
-// import { headerText } from "@/app/lib/locale-text/ui-text";
 import { fetchBodyEvents } from "@/app/lib/utils/getAstronomyData";
+import { fetchIpgeoData } from "@/app/lib/utils/getIpgeoData";
+import TextPrimary from "./TextPrimary";
+import TextSecondary from "./TextSecondary";
 
 type DataToDisplay = {
     [key: string]: string | undefined;
@@ -32,9 +29,6 @@ const DataList = ({ data }: { data: AstronomyApiResponse }) => {
 
 export default async function EventPanel({ eventType }: { eventType: 'sun' | 'moon' }) {
 
-    // const location = useAppSelector((state) => state.location);
-    // const { language } = useAppSelector((state) => state.language);
-
     const initialLocation = {
         lat: 54.42,
         lon: 25.16
@@ -49,30 +43,34 @@ export default async function EventPanel({ eventType }: { eventType: 'sun' | 'mo
         time: '08:00:00'
     });
 
-    // useEffect(() => {
-    //     console.log(data);
-    // }, [data]);
+    const ipgeoData = await fetchIpgeoData({
+        lat: initialLocation.lat.toString(),
+        lon: initialLocation.lon.toString()
+    });
 
     return (
         <div className={`px-4 py-6 w-full flex flex-col bg-space-background sm:w-4/5 sm:mx-auto md:w-[70%] lg:w-[80%]
             ${eventType === 'sun' && 'border-b border-space-border'}`}>
-            {/* <div className="text-3xl capitalize">{eventType === 'sun' ? headerText[language].solarEvents : headerText[language].lunarEvents}</div> */}
+            <TextPrimary eventType={eventType} />
             <div className="flex flex-row gap-2 mt-4 mb-6">
                 {
                     eventType === 'sun' ?
                     <>
-                        <Card title={'Sunrise'} value={'07:30'} />
-                        <Card title={'Sunset'} value={'17:30'} />
+                        <Card title={'Sunrise'} value={ipgeoData.sunrise} />
+                        <Card title={'Sunset'} value={ipgeoData.sunset} />
+                        <Card title={'Day length'} value={ipgeoData.day_length} />
                     </> :
                     <>
-                        <Card title={'Moonrise'} value={'11:00'} />
-                        <Card title={'Moonset'} value={'21:00'} />
+                        <Card title={'Moonrise'} value={ipgeoData.moonrise} />
+                        <Card title={'Moonset'} value={ipgeoData.moonset} />
+                        <Card title={'Moon phase'} value={ipgeoData.moon_phase} />
                     </>
                 }
             </div>
             <div className="flex flex-row justify-start items-center h-16">
                 <div className="flex flex-col items-start gap-1">
-                    <div className="text-2xl">Nearest {eventType === 'sun' ? 'solar' : 'lunar'} eclipse</div>
+                    <TextSecondary eventType={eventType} />
+                    {/* <div className="text-2xl">Nearest {eventType === 'sun' ? 'solar' : 'lunar'} eclipse</div> */}
                     <div className="text-sm md:text-base md:font-semibold font-bold text-space-text-secondary">
                         {/* {
                             loading || !data ?
