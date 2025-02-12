@@ -24,13 +24,14 @@ const headingMap: HeadingType = {
     }
 }
 
-export default function TextSecondary({ eventType }: { eventType: string }) {
+export default function TextSecondary({ eventType, additionalText }: { eventType: string, additionalText?: string }) {
 
     const { language } = useAppSelector((state) => state.language);
 
     return (
-        <div className="text-xl capitalize">
-            {headingMap[language][eventType]}
+        <div className="flex flex-col py-2">
+            <span className="text-lg capitalize text-space-text">{headingMap[language][eventType]}</span>
+            <span className="text-sm font-bold text-space-text-secondary">{additionalText}</span>
         </div>
     );
 

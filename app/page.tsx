@@ -1,5 +1,5 @@
-import EventPanel from "./components/ui/EventPanel";
-import Panel from "./components/ui/Panel";
+import EventPanel from "./components/large-body/EventPanel";
+import Panel from "./components/small-body/Panel";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

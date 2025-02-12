@@ -72,7 +72,7 @@ export default function Card({ title, value, text, titleSuffix, cardFull }: Prop
 
 
     return (
-        <div className={`${ cardFull ? 'w-full' : 'w-[calc(50%-4px)]' } bg-space-button rounded-lg flex flex-col p-3 lg:max-w-[250px]`}>
+        <div className={`${ cardFull ? 'w-full' : 'w-[calc(50%-4px)]' } bg-space-button rounded-lg flex flex-col p-3 lg:w-1/3 lg:max-w-[250px]`}>
             <div className="text-sm text-space-text-secondary">{cardTextMap[language][title]} {titleSuffix}</div>
             <div className="flex flex-row gap-1 items-end">
                 <div className="text-2xl font-bold">{title === 'moonPhase' ? moonPhases[language][value] : value}</div>

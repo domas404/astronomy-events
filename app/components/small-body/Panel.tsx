@@ -1,11 +1,11 @@
-import { Asteroid, Comet } from "./Illustrations";
+import { Asteroid, Comet } from "../ui/Illustrations";
 import { SBDB_Data } from "@/app/lib/types/SBDB";
-import { HomeDataView } from "../small-body/DataView";
-import Card from "./Card";
+import { HomeDataView } from "./DataView";
 import { fetchClosestBodies, fetchSelectedBody } from "@/app/lib/utils/getNasaData";
-import TextPrimary from "./TextPrimary";
-import TextSecondary from "./TextSecondary";
-import ViewMoreButton from "./ViewMoreButton";
+import TextPrimary from "../ui/TextPrimary";
+import TextSecondary from "../ui/TextSecondary";
+import ViewMoreButton from "../ui/ViewMoreButton";
+import { SmallBodyCards } from "../ui/CardContainer";
 
 type DataToDisplay = {
     [key: string]: string | undefined;
@@ -35,30 +35,9 @@ export default async function Panel({ kind }: { kind: 'c' | 'a' }) {
         <div className="px-4 py-10 w-full flex flex-col bg-space-background sm:w-4/5 sm:mx-auto md:w-[70%] lg:w-[80%]
             border-b border-space-border">
             <TextPrimary eventType={kind} />
-            <div className="flex flex-row flex-wrap gap-2 mt-4 mb-6">
-                {
-                    kind === 'c' ?
-                    <>
-                        <Card title={'daysUntilComet'} value={'16'} text={'days'} />
-                        <Card title={'totalYearly'} value={'2'} text={'comets'} />
-                    </> :
-                    <>
-                        <Card title={'daysUntilAsteroid'} value={'1'} text={'days'} />
-                        <Card title={'totalYearly'} value={'2450'} text={'asteroids'} />
-                    </>
-                }
-            </div>
-            <div className="flex flex-row justify-start items-center h-16">
-                <div className="flex flex-col items-start gap-1">
-                    <div className="text-2xl">
-                        <TextSecondary eventType={kind} />
-                    </div>
-                    <div className="text-sm md:text-base md:font-semibold font-bold text-space-text-secondary">
-                        {data.object?.fullname}
-                    </div>
-                </div>
-            </div>
-            <div className="flex flex-row pt-4">
+            <SmallBodyCards eventType={kind} />
+            <TextSecondary eventType={kind} additionalText={data.object?.fullname} />
+            <div className="flex flex-row">
                 <div className="h-52 w-1/3 min-w-[150px] sm:min-w-[180px] bg-black/20 rounded-3xl flex justify-center items-center">
                     { kind === 'c' && <Comet /> }
                     { kind === 'a' && <Asteroid /> }

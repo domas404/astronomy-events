@@ -11,6 +11,7 @@ export default {
 		extend: {
 			colors: {
 				'space-background': '#0F1317',
+				'space-background-darker': '#0A1012',
 				'space-border': '#30373D',
 				'space-button': '#161c21',
 				'space-button-hover': '#1b2228',
