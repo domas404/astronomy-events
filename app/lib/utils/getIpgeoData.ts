@@ -2,8 +2,8 @@ import { IpAstronomyResponse, IpGeoLocationResponse } from "../types/ip-geolocat
 
 const IPGEOLOCATION_API_URL = 'https://api.ipgeolocation.io';
 
-export async function fetchIpAstroData({ lat, lon }: { lat: string, lon: string }) {
-    const url = `${IPGEOLOCATION_API_URL}/astronomy?apiKey=${process.env.IPGEOLOCATION_API_KEY}&lat=${lat}&long=${lon}`;
+export async function fetchIpAstroData() {
+    const url = `${IPGEOLOCATION_API_URL}/astronomy?apiKey=${process.env.IPGEOLOCATION_API_KEY}`;
 
     try {
         const response = await fetch(url);

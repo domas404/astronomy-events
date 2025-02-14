@@ -1,4 +1,4 @@
-import { IpgeolocationResponse } from "@/app/lib/types/ip-geolocation-api";
+import { IpAstronomyResponse } from "@/app/lib/types/ip-geolocation-api";
 import Card from "./Card";
 
 const getSmallBodyTextId = (kind: string, total: number) => {
@@ -59,7 +59,7 @@ export const SmallBodyCards = ({ eventType, total }: { eventType: 'c' | 'a', tot
     }
 }
 
-export const LargeBodyCards = ({ eventType, data }: { eventType: 'sun' | 'moon', data: IpgeolocationResponse }) => {
+export const LargeBodyCards = ({ eventType, data }: { eventType: 'sun' | 'moon', data: IpAstronomyResponse }) => {
     if (eventType === 'sun') {
         return <SunCards sunrise={data.sunrise} sunset={data.sunset} dayLength={data.day_length} />
     } else {

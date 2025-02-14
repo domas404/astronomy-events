@@ -50,10 +50,7 @@ export default async function EventPanel({ eventType }: { eventType: 'sun' | 'mo
         time: '08:00:00'
     });
 
-    const ipgeoData = await fetchIpAstroData({
-        lat: location.lat.toString(),
-        lon: location.lon.toString()
-    });
+    const ipgeoData = await fetchIpAstroData();
 
     return (
         <div className={`px-4 py-10 w-full flex flex-col bg-space-background sm:w-4/5 sm:mx-auto md:w-[70%] lg:w-[80%]
