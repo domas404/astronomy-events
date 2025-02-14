@@ -1,9 +1,7 @@
 'use client';
 
 import { Asteroid, Comet } from "../ui/Illustrations";
-// import { CloseApproachData } from "@/app/lib/types";
 import { SBDB_Data } from "@/app/lib/types/SBDB";
-// import { useSelectedData } from "@/app/hooks/useSelectedData";
 import { DataListSkeleton, MainDataSkeleton } from "../skeletons/Skeletons";
 import { DataView } from "./DataView";
 import { additionalInfo } from "@/app/lib/locale-text/ui-text";
@@ -38,7 +36,6 @@ type Props = {
 
 export default function Preview({ data, loading, type }: Props) {
 
-    // const { data, loading } = useSelectedData({ selectedEvent });
     const { language } = useAppSelector((state) => state.language);
     
     return (
