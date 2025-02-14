@@ -30,6 +30,7 @@ export async function fetchClosestBodies({ kind, limit }: { kind: 'a' | 'c', lim
         return transformedData;
         
     } catch (error) {
+        console.log(url);
         console.error('Error fetching NASA SBDB data:', error);
         throw error;
     }

@@ -3,11 +3,12 @@ import { LunarEclipse, SolarEclipse } from "../ui/Illustrations";
 import { HomeDataView } from "../small-body/DataView";
 import { getStartTime, getDuration } from "@/app/lib/format-data/format-astronomy";
 import { fetchBodyEvents } from "@/app/lib/utils/getAstronomyData";
-import { fetchIpgeoData } from "@/app/lib/utils/getIpgeoData";
+import { fetchIpAstroData } from "@/app/lib/utils/getIpgeoData";
 import TextPrimary from "../ui/TextPrimary";
 import TextSecondary from "../ui/TextSecondary";
 // import ViewMoreButton from "../ui/ViewMoreButton";
 import { LargeBodyCards } from "../ui/CardContainer";
+import { cookies } from "next/headers";
 
 type DataToDisplay = {
     [key: string]: string | undefined;
@@ -32,21 +33,26 @@ export default async function EventPanel({ eventType }: { eventType: 'sun' | 'mo
 
     const initialLocation = {
         lat: 54.42,
-        lon: 25.16
+        lon: 25.16,
+        city: 'Kaunas'
     }
+
+    const locationCookie = (await cookies()).get("userLocation")?.value;
+    const location = locationCookie ? JSON.parse(decodeURIComponent(locationCookie)) : initialLocation;
+
 
     const data = await fetchBodyEvents({
         body: eventType,
-        lat: initialLocation.lat.toString(),
-        lon: initialLocation.lon.toString(),
+        lat:  location.lat.toString(),
+        lon: location.lon.toString(),
         from: '2025-01-01',
         to: '2025-12-31',
         time: '08:00:00'
     });
 
-    const ipgeoData = await fetchIpgeoData({
-        lat: initialLocation.lat.toString(),
-        lon: initialLocation.lon.toString()
+    const ipgeoData = await fetchIpAstroData({
+        lat: location.lat.toString(),
+        lon: location.lon.toString()
     });
 
     return (

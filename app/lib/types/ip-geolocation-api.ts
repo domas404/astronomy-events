@@ -1,6 +1,6 @@
 
 
-export type IpgeolocationResponse = {
+export type IpAstronomyResponse = {
     location: {
         latitude: number,
         longitude: number,
@@ -25,4 +25,22 @@ export type IpgeolocationResponse = {
     moon_phase: string,
     moon_illumination_percentage: string,
     moon_angle: number
+}
+
+export type IpGeoLocationResponse = {
+    ip: string,
+    continent_code: string,
+    continent_name: string,
+    country_code2: string,
+    country_code3: string,
+    country_name: string,
+    country_name_official: string,
+    is_eu: boolean,
+    state_prov: string,
+    state_code: string,
+    district: string,
+    city: string,
+    zipcode: string,
+    latitude: string,
+    longitude: string
 }

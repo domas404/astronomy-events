@@ -1,0 +1,66 @@
+'use client';
+
+import { usePathname } from "next/navigation"
+import { useState } from "react";
+
+import { MdMenu } from "react-icons/md";
+// import Location from "./Location";
+import { useAppSelector } from "@/app/lib/redux/hooks";
+import { headerText } from "@/app/lib/locale-text/ui-text";
+// import Link from "next/link";
+
+const navItems = [
+    'asteroids',
+    'comets',
+    'solarEvents',
+    'lunarEvents'
+];
+
+const navItemRoutes = [
+    'asteroids',
+    'comets',
+    'solar-events',
+    'lunar-events'
+];
+
+export default function Navigation() {
+
+    const [menuOpen, setMenuOpen] = useState(false);
+    const pathname = usePathname();
+    const { language } = useAppSelector((state) => state.language);
+
+    const mappedNavItems = navItems.map((item, index) => {
+        return (
+            <li key={index} className='flex mx-2 md:w-[116px] md:justify-center md:mx-0'>
+                <a
+                    href={`/${navItemRoutes[index]}`}
+                    className={`w-full flex items-center p-4 rounded-md text-slate-200 
+                        hover:cursor-pointer hover:text-white hover:bg-space-button-hover active:bg-space-button-active transition-colors
+                        md:w-[108px] md:justify-center md:p-1 md:rounded-full
+                        ${pathname === `/${item}` ? 'bg-space-button-active' : 'bg-space-background'}`}
+                >
+                    {headerText[language][item]}
+                </a>
+            </li>
+        );
+    });
+
+    return (
+        <div className="flex items-center basis-1/3 order-1 md:order-2">
+            <button className="flex items-center p-2 md:hidden" onClick={() => setMenuOpen(!menuOpen)}>
+                <MdMenu size={24} className="text-space-text-secondary" />
+            </button>
+            <ul
+                className={`${menuOpen ? 'visible' : 'invisible'} w-full top-16 gap-1 rounded-lg absolute pb-4
+                    flex flex-col border py-2 px-2 border-space-border bg-space-background
+                    md:w-auto md:mx-auto md:flex-row md:text-sm md:relative md:top-0 md:rounded-full md:visible md:py-1 md:px-0`}
+            >
+                <li className="md:hidden p-4 mx-5 mb-1 uppercase tracking-wider font-semibold flex
+                    text-space-text-secondary border-b border-space-border justify-center">
+                    Astronomy Events
+                </li>
+                {mappedNavItems}
+            </ul>
+        </div>
+    );
+}
