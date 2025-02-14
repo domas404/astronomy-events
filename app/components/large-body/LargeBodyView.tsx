@@ -1,5 +1,3 @@
-'use client';
-
 import EventPreview from "./EventPreview";
 
 export default function LargeBodyView({ kind }: { kind: 's' | 'm' }) {
@@ -13,16 +11,6 @@ export default function LargeBodyView({ kind }: { kind: 's' | 'm' }) {
                 <div className="w-full flex justify-center lg:basis-1/2">
                     <EventPreview eventType={kind === 's' ? 'sun' : 'moon'} />
                 </div>
-                <table className="w-full bg-space-background flex flex-col pt-2 pb-4 sm:items-center lg:basis-1/2">
-                    {/* <TableHead /> */}
-                    {/* <Table
-                        selectedEvent={selectedEvent}
-                        updateSelectedEvent={updateSelectedEvent}
-                        data={data}
-                        loading={loading}
-                        errorMessage={errorMessage}
-                    /> */}
-                </table>
             </div>
         </>
     );

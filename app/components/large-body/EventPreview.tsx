@@ -1,12 +1,10 @@
-'use client';
-
 import { LunarEclipse, SolarEclipse } from "../ui/Illustrations";
 import { DataListSkeleton, MainDataSkeleton } from "../skeletons/Skeletons";
 import { DataView } from "../small-body/DataView";
-import { useAppSelector } from "@/app/lib/redux/hooks";
-import { useAstroEvents } from "@/app/hooks/useAstroEvents";
 import { AstronomyApiResponse, EventItem } from "@/app/lib/types/astronomy-api";
 import { getDuration, getEndTime, getStartTime } from "@/app/lib/format-data/format-astronomy";
+import { cookies } from "next/headers";
+import { fetchBodyEvents } from "@/app/lib/utils/getAstronomyData";
 
 type DataToDisplay = {
     [key: string]: string | undefined;
@@ -30,25 +28,31 @@ type Props = {
     eventType: 'sun' | 'moon',
 }
 
-export default function EventPreview({ eventType }: Props) {
+export default async function EventPreview({ eventType }: Props) {
 
-    const location = useAppSelector((state) => state.location);
+    const initialLocation = {
+            lat: 54.42,
+            lon: 25.16,
+            city: 'Kaunas'
+        }
     
-    const { data, loading } = useAstroEvents({
-        loaded: (location.latitude && location.longitude) ? true : false,
-        body: eventType,
-        lat: location.latitude?.toString(),
-        lon: location.longitude?.toString(),
-        from: '2025-01-01',
-        to: '2025-12-31',
-        time: '08:00:00'
-    });
+        const locationCookie = (await cookies()).get("userLocation")?.value;
+        const location = locationCookie ? JSON.parse(decodeURIComponent(locationCookie)) : initialLocation;
+    
+        const data = await fetchBodyEvents({
+            body: eventType,
+            lat:  location.lat.toString(),
+            lon: location.lon.toString(),
+            from: '2025-01-01',
+            to: '2025-12-31',
+            time: '08:00:00'
+        });
     
     return (
         <div className="flex flex-col p-4 gap-6 w-full">
             <header className="flex flex-col items-start gap-1">
                 {
-                    loading || !data ?
+                    !data ?
                     <div className="h-6 bg-space-button-active rounded-full w-32 mt-1 animate-pulse"></div> :
                     <h2 className="text-base md:text-lg md:font-semibold font-bold text-space-text-secondary">
                         {/* The { data.data.table.header[0].slice(0, 10) } { eventType === 'sun' ? 'solar' : 'lunar' } eclipse */}
@@ -63,7 +67,7 @@ export default function EventPreview({ eventType }: Props) {
                 </div>
                 <ul className="w-2/3 mx-6 my-4 flex flex-col flex-nowrap md:mx-8 md:pl-6 md:border-l border-space-border">
                     {
-                        loading || !data ?
+                        !data ?
                         <MainDataSkeleton /> :
                         <>
                             <DataView id={'event_type'} value={data.data.table.rows[0].cells[0].type} />
@@ -77,7 +81,7 @@ export default function EventPreview({ eventType }: Props) {
                 <div className="bg-space-button px-6 py-6 rounded-lg flex flex-row">
                     <ul className="flex flex-row flex-wrap w-full gap-y-2">
                         {
-                            loading || !data ?
+                            !data ?
                             <DataListSkeleton />
                             :
                             <DataList data={data} />

@@ -10,8 +10,8 @@ import Logo from "./Logo";
 const navItems = [
     'asteroids',
     'comets',
-    'solarEvents',
-    'lunarEvents'
+    // 'solarEvents',
+    // 'lunarEvents'
 ];
 
 const navItemRoutes = [
