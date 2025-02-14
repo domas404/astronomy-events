@@ -1,20 +1,32 @@
 import { IpgeolocationResponse } from "@/app/lib/types/ip-geolocation-api";
 import Card from "./Card";
 
-export const CometCards = () => {
+const getSmallBodyTextId = (kind: string, total: number) => {
+    if (total%10 === 1) {
+        return kind;
+    } else if (total%10 === 0) {
+        return kind + 'Deci';
+    } else {
+        return kind + 's'
+    }
+}
+
+export const CometCards = ({ total }: { total: number }) => {
+    const cometText = getSmallBodyTextId('comet', total);
     return (
         <div className="flex flex-row flex-wrap gap-2 mt-4 mb-6 lg:flex-nowrap">
-            <Card title={'daysUntilComet'} value={'16'} text={'days'} />
-            <Card title={'totalYearly'} value={'2'} text={'comets'} />
+            {/* <Card title={'daysUntilComet'} value={'16'} text={'days'} /> */}
+            <Card title={'totalYearly'} value={total.toString()} text={cometText} />
         </div>
     );
 }
 
-export const AsteroidCards = () => {
+export const AsteroidCards = ({ total }: { total: number }) => {
+    const asteroidText = getSmallBodyTextId('asteroid', total);
     return (
         <div className="flex flex-row flex-wrap gap-2 mt-4 mb-6 lg:flex-nowrap">
-            <Card title={'daysUntilAsteroid'} value={'1'} text={'days'} />
-            <Card title={'totalYearly'} value={'2450'} text={'asteroids'} />
+            {/* <Card title={'daysUntilAsteroid'} value={'1'} text={'days'} /> */}
+            <Card title={'totalYearly'} value={total.toString()} text={asteroidText} />
         </div>
     );
 }
@@ -39,11 +51,11 @@ export const MoonCards = ({ moonrise, moonset, moonPhase }: { moonrise: string, 
     );
 }
 
-export const SmallBodyCards = ({ eventType }: { eventType: 'c' | 'a' }) => {
+export const SmallBodyCards = ({ eventType, total }: { eventType: 'c' | 'a', total: number }) => {
     if (eventType === 'c') {
-        return <CometCards />
+        return <CometCards total={total} />
     } else {
-        return <AsteroidCards />
+        return <AsteroidCards total={total} />
     }
 }
 

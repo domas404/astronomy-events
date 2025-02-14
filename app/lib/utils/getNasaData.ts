@@ -1,4 +1,4 @@
-import { CometApiResponse, CometApiData, CloseApproachData } from "../types";
+import { SmallBodyApiResponse, SmallBodyApiData, CloseApproachData, SmallBodyTotalApiResponse } from "../types";
 import { SBDB_Data, SBDB_Response } from "../types/SBDB";
 
 const NASA_SBDB_API_URL = 'https://ssd-api.jpl.nasa.gov';
@@ -12,7 +12,7 @@ export async function fetchClosestBodies({ kind, limit }: { kind: 'a' | 'c', lim
         if (!response.ok) {
             throw new Error(`Failed to fetch data: ${response.status} ${response.statusText}`);
         }
-        const data: CometApiResponse = await response.json();
+        const data: SmallBodyApiResponse = await response.json();
         const keys = data.fields;
         const individualBodyData = data.data.map((item) => {
             return item.reduce((acc, value, index) => {
@@ -20,7 +20,7 @@ export async function fetchClosestBodies({ kind, limit }: { kind: 'a' | 'c', lim
                 return acc;
             }, {} as Record<string, string | null>);
         });
-        const transformedData: CometApiData = {
+        const transformedData: SmallBodyApiData = {
             signature: data.signature,
             fields: data.fields,
             total: data.total,
@@ -79,6 +79,23 @@ export async function fetchSelectedBody({ des }: { des?: string }){
         return cometData;
 
     } catch (error) {
+        console.error('Error fetching NASA SBDB data:', error);
+        throw error;
+    }
+}
+
+export async function fetchTotal({ kind }: { kind: 'a' | 'c' }) {
+    const url = `${NASA_SBDB_API_URL}/cad.api?kind=${kind}&date-min=2025-01-01&date-max=2025-12-31&${kind === 'a' ? 'nea=true&':'dist-max=0.5&'}total-only=true`;
+
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`Failed to fetch data: ${response.status} ${response.statusText}`);
+        }
+        const data: SmallBodyTotalApiResponse = await response.json();
+        return data.total;
+
+    } catch(error) {
         console.error('Error fetching NASA SBDB data:', error);
         throw error;
     }

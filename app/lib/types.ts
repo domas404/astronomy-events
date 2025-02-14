@@ -15,7 +15,7 @@ export type CloseApproachData = {
     fullname: string;
 }
 
-export type CometApiResponse = {
+export type SmallBodyApiResponse = {
     signature: {
         source: string;
         version: string;
@@ -26,13 +26,22 @@ export type CometApiResponse = {
     total: number;
 }
 
-export type CometApiData = {
+export type SmallBodyApiData = {
     signature: {
         source: string;
         version: string;
     },
     fields: string[];
     data: CloseApproachData[];
+    count: number;
+    total: number;
+}
+
+export type SmallBodyTotalApiResponse = {
+    signature: {
+        source: string;
+        version: string;
+    },
     count: number;
     total: number;
 }

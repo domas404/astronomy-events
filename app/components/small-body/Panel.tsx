@@ -1,7 +1,7 @@
 import { Asteroid, Comet } from "../ui/Illustrations";
 import { SBDB_Data } from "@/app/lib/types/SBDB";
 import { HomeDataView } from "./DataView";
-import { fetchClosestBodies, fetchSelectedBody } from "@/app/lib/utils/getNasaData";
+import { fetchClosestBodies, fetchSelectedBody, fetchTotal } from "@/app/lib/utils/getNasaData";
 import TextPrimary from "../ui/TextPrimary";
 import TextSecondary from "../ui/TextSecondary";
 import ViewMoreButton from "../ui/ViewMoreButton";
@@ -30,12 +30,13 @@ export default async function Panel({ kind }: { kind: 'c' | 'a' }) {
 
     const bodiesData = await fetchClosestBodies({ kind, limit: 1 });
     const data = await fetchSelectedBody({ des: bodiesData.data[0].des });
+    const totalThisYear = await fetchTotal({ kind });
 
     return (
         <div className="px-4 py-10 w-full flex flex-col bg-space-background sm:w-4/5 sm:mx-auto md:w-[70%] lg:w-[80%]
             border-b border-space-border">
             <TextPrimary eventType={kind} />
-            <SmallBodyCards eventType={kind} />
+            <SmallBodyCards eventType={kind} total={totalThisYear} />
             <TextSecondary eventType={kind} additionalText={data.object?.fullname} />
             <div className="flex flex-row">
                 <div className="h-52 w-1/3 min-w-[150px] sm:min-w-[180px] bg-black/20 rounded-3xl flex justify-center items-center">
