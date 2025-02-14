@@ -58,19 +58,15 @@ export default async function EventPanel({ eventType }: { eventType: 'sun' | 'mo
             <TextPrimary eventType={eventType} />
             <LargeBodyCards eventType={eventType} data={ipgeoData} />
             <TextSecondary eventType={eventType} />
-            {/* <div className="bg-space-button rounded-lg p-4 border-space-border"> */}
-                <div className="flex flex-row">
-                    <div className="h-52 w-1/3 min-w-[150px] sm:min-w-[180px] bg-space-background-darker rounded-3xl flex justify-center items-center">
-                        { eventType === 'sun' && <SolarEclipse /> }
-                        { eventType === 'moon' && <LunarEclipse /> }
-                    </div>
-                    <ul className="w-2/3 mx-6 my-4 flex flex-col md:flex-row flex-nowrap md:mx-8 md:flex-wrap md:pl-8 md:border-l border-space-border">
-
-                            <DataList data={data} />
-                    </ul>
+            <div className="flex flex-row">
+                <div className="h-52 w-1/3 min-w-[150px] sm:min-w-[180px] bg-space-background-darker rounded-3xl flex justify-center items-center">
+                    { eventType === 'sun' && <SolarEclipse /> }
+                    { eventType === 'moon' && <LunarEclipse /> }
                 </div>
-                {/* <ViewMoreButton eventType={eventType} /> */}
-            {/* </div> */}
+                <ul className="w-2/3 mx-6 my-4 flex flex-col md:flex-row flex-nowrap md:mx-8 md:flex-wrap md:pl-8 md:border-l border-space-border">
+                    <DataList data={data} />
+                </ul>
+            </div>
         </div>
     );
 }

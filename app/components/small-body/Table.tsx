@@ -1,14 +1,10 @@
-// 'use client';
-
 import TableRow from "./TableRow";
 import { TableSkeleton } from "../skeletons/Skeletons";
 import { TableError } from "../errors/Errors";
-import { CometApiData } from "@/app/lib/types";
+import { SmallBodyApiData } from "@/app/lib/types";
 
 type Props = {
-    // selectedEvent: CloseApproachData | undefined,
-    // updateSelectedEvent: (des: string) => void,
-    data: CometApiData | undefined,
+    data: SmallBodyApiData | undefined,
     loading: boolean,
     errorMessage: string | undefined,
     kind: 'a' | 'c',
@@ -17,7 +13,6 @@ type Props = {
 export default function Table({ data, loading, errorMessage, kind }: Props) {
     
     const mappedCometList = data?.data.map((item, index) => {
-        // const selectedDes = selectedEvent?.des;
         return (
             <TableRow
                 key={index}
@@ -27,7 +22,6 @@ export default function Table({ data, loading, errorMessage, kind }: Props) {
                 dist={item.dist}
                 selected={false}
                 kind={kind}
-                // updateSelectedEvent={updateSelectedEvent}
             />
         );
     });

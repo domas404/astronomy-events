@@ -1,7 +1,6 @@
 import EventPreview from "./EventPreview";
 
 export default function LargeBodyView({ kind }: { kind: 's' | 'm' }) {
-
     return (
         <>
             <div className="w-full lg:w-[90%] mx-4 sm:w-4/5 md:w-[70%] xl:w-[80%] text-3xl pt-6">

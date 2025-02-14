@@ -6,7 +6,6 @@ import { useAppSelector } from "@/app/lib/redux/hooks";
 
 export const HomeDataItem = ({ id, value, index }: { id: string, value: string, index: number }) => {
     const { language } = useAppSelector((state) => state.language);
-    // console.log(language);
     return (
         <li className={`${index > 2 && 'hidden md:block'} basis-1/2 p-2 hover:bg-space-button-active rounded-lg group transition-colors`}>
             <div className="mt-14 -ml-2 rounded-lg p-2 invisible group-hover:visible absolute max-w-48
@@ -21,7 +20,6 @@ export const HomeDataItem = ({ id, value, index }: { id: string, value: string, 
 
 export const DataItem = ({ id, value }: { id: string, value: string }) => {
     const { language } = useAppSelector((state) => state.language);
-    // console.log(language);
     return (
         <li className="basis-1/2 p-2 hover:bg-space-button-active rounded-lg group transition-colors">
             <div className="mt-14 -ml-2 rounded-lg p-2 invisible group-hover:visible absolute max-w-48

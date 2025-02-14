@@ -9,7 +9,6 @@ type Props = {
     dist: string,
     selected: boolean,
     kind: 'a' | 'c',
-    // updateSelectedEvent: (des: string) => void;
 }
 
 export default function TableRow({ name, des, date, dist, selected, kind }: Props) {
