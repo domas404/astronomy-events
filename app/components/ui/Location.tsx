@@ -20,7 +20,7 @@ export default function Location({ location }: { location: IpGeoLocationResponse
 
 
     return (
-        <div className="flex justify-end items-center order-3 basis-1/3">
+        <div className="flex justify-end items-center order-3 basis-1/3 mr-2 md:mr-0">
             <button
                 // onClick={setLocation}
                 className="flex flex-row h-8 max-w-28 justify-center items-center border rounded-full text-space-text-secondary 
