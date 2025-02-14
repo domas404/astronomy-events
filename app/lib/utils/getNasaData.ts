@@ -5,7 +5,7 @@ const NASA_SBDB_API_URL = 'https://ssd-api.jpl.nasa.gov';
 
 export async function fetchClosestBodies({ kind, limit }: { kind: 'a' | 'c', limit: number }) {
 
-    const url = `${NASA_SBDB_API_URL}/cad.api?kind=${kind}&date-max=2030-12-31&dist-max=0.5&sort=date&diameter=true&fullname=true&limit=${limit}`;
+    const url = `${NASA_SBDB_API_URL}/cad.api?kind=${kind}&date-max=%2B2500&dist-max=0.5&sort=date&diameter=true&fullname=true&limit=${limit}`;
 
     try {
         const response = await fetch(url);
@@ -85,8 +85,9 @@ export async function fetchSelectedBody({ des }: { des?: string }){
 }
 
 export async function fetchTotal({ kind }: { kind: 'a' | 'c' }) {
-    const url = `${NASA_SBDB_API_URL}/cad.api?kind=${kind}&date-min=2025-01-01&date-max=2025-12-31&${kind === 'a' ? 'nea=true&':'dist-max=0.5&'}total-only=true`;
-
+    const year = new Date().getFullYear();
+    const url = `${NASA_SBDB_API_URL}/cad.api?kind=${kind}&date-min=${year}-01-01&date-max=${year}-12-31&${kind === 'a' ? 'nea=true&':'dist-max=0.5&'}total-only=true`;
+    
     try {
         const response = await fetch(url);
         if (!response.ok) {
